@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">COVID19 Notifier 🇮🇳</string>
+    <string name="app_name">COVID-19 Stats</string>
     <string name="confirmed">Confirmed</string>
     <string name="active">Active</string>
     <string name="recovered">Recovered</string>
@@ -7,5 +7,14 @@
     <string name="default_notification_channel_id">default</string>
     <string name="text_confirmed_cases">Confirmed Cases : %s</string>
     <string name="text_last_updated">Last Updated : %s</string>
-    <string name="default_notification_channel_name">Covid-19 India</string>
+    <string name="default_notification_channel_name">Covid-19 Stats</string>
+    <string name="worldwide_charts">Worldwide Charts</string>
+    <string name="title_global">Global</string>
+    <string name="title_country">Country Stats</string>
+    <string name="title_news">News</string>
+    <string name="chart_combined">Combined</string>
+    <string name="chart_cases">Cases</string>
+    <string name="chart_deaths">Deaths</string>
+    <string name="chart_recovered">Recovered</string>
+    <string name="extended_fab_filter">Filter</string>
 </resources>
