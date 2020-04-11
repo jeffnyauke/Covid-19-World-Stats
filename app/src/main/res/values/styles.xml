@@ -28,7 +28,6 @@
 
     <style name="TextStateName">
         <item name="android:layout_gravity">center</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1
         </item>
         <item name="android:textColor">@android:color/black</item>

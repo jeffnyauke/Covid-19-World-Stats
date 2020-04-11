@@ -124,7 +124,7 @@ class CountryChartAdapter :
 
             //Part3
             chart.xAxis.labelRotationAngle = 0f
-            chart.xAxis.granularity = 1000f
+            chart.xAxis.granularity = 2000f
             chart.xAxis.setDrawGridLines(false)
             chart.xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
@@ -141,7 +141,7 @@ class CountryChartAdapter :
 
             //Part7
             chart.axisRight.isEnabled = false
-            chart.xAxis.axisMaximum = entriesCases.last().x + 720f
+            chart.xAxis.axisMaximum = entriesCases.last().x + 2000f
             chart.description.isEnabled = false
 
             //Part8
