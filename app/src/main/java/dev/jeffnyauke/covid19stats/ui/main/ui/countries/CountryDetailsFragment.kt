@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.MergeAdapter
 import dev.jeffnyauke.covid19stats.databinding.FragmentCountryDetailsBinding
 import dev.jeffnyauke.covid19stats.ui.main.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryChartAdapter
+import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryHeaderAdapter
 import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryTotalAdapter
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,7 +31,8 @@ class CountryDetailsFragment : Fragment() {
 
     private val mTotalAdapter = CountryTotalAdapter()
     private val mChartAdapter = CountryChartAdapter()
-    private val adapter = MergeAdapter(mTotalAdapter, mChartAdapter)
+    private val mCountryHeaderAdapter = CountryHeaderAdapter()
+    private val adapter = MergeAdapter(mCountryHeaderAdapter, mTotalAdapter, mChartAdapter)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,8 +52,8 @@ class CountryDetailsFragment : Fragment() {
     }
 
     private fun initData() {
+        mCountryHeaderAdapter.submitList(listOf(args.country))
         mTotalAdapter.submitList(listOf(args.country))
-
         viewModel.covidCountryHistoricalData.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is State.Loading -> binding.swipeRefreshLayout.isRefreshing = true
