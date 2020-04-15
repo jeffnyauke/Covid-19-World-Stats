@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.MergeAdapter
 import dev.jeffnyauke.covid19stats.databinding.FragmentCountryDetailsBinding
+import dev.jeffnyauke.covid19stats.ui.main.MainActivity
 import dev.jeffnyauke.covid19stats.ui.main.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryChartAdapter
 import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryHeaderAdapter
@@ -50,6 +51,7 @@ class CountryDetailsFragment : Fragment() {
 
         binding.recycler.adapter = adapter
 
+        (activity as MainActivity).supportActionBar?.title = args.country.country
         initData()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -90,4 +92,5 @@ class CountryDetailsFragment : Fragment() {
     private fun loadData() {
         viewModel.getCountryHistoricalData(args.country.country.toString())
     }
+
 }
