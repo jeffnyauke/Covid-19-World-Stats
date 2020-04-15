@@ -4,16 +4,17 @@ import dev.jeffnyauke.covid19stats.model.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface Covid19StatsApiService {
 
-    @GET("/all")
+    @GET("/v2/all")
     suspend fun getGlobalData(): Response<Global>
 
-    @GET("/countries")
-    suspend fun getAllCountriesData(): Response<List<Country>>
+    @GET("/v2/countries")
+    suspend fun getAllCountriesData(@Query("sort") sort: String): Response<List<Country>>
 
-    @GET("/states")
+    @GET("/v2/states")
     suspend fun getAllStatesData(): Response<List<CountryState>>
 
     @GET("/v2/historical/all")

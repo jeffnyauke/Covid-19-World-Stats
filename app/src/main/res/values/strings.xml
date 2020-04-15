@@ -17,4 +17,6 @@
     <string name="chart_deaths">Deaths</string>
     <string name="chart_recovered">Recovered</string>
     <string name="extended_fab_filter">Filter</string>
+    <string name="title_sort">Sort</string>
+    <string name="title_search">Search</string>
 </resources>

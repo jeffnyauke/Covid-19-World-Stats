@@ -18,10 +18,10 @@ class CovidStatsRepository(private val apiService: Covid19StatsApiService) {
         }.asFlow().flowOn(Dispatchers.IO)
     }
 
-    fun getAllCountriesData(): Flow<State<List<Country>>> {
+    fun getAllCountriesData(sort: String): Flow<State<List<Country>>> {
         return object : NetworkBoundRepository<List<Country>>() {
             override suspend fun fetchFromRemote(): Response<List<Country>> =
-                apiService.getAllCountriesData()
+                apiService.getAllCountriesData(sort)
         }.asFlow().flowOn(Dispatchers.IO)
     }
 

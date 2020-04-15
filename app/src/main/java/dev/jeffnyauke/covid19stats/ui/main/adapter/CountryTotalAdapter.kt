@@ -30,7 +30,6 @@ class CountryTotalAdapter :
     class TotalViewHolder(private val binding: ItemTotalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(country: Country) {
-            binding.confirmedLayout.requestFocus()
             binding.textLastUpdatedView.text = itemView.context.getString(
                 R.string.text_last_updated,
                 getPeriod(

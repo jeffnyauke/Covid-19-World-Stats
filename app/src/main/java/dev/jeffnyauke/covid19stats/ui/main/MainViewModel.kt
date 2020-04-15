@@ -44,9 +44,9 @@ class MainViewModel(private val repository: CovidStatsRepository) : ViewModel() 
         }
     }
 
-    fun getAllCountriesData() {
+    fun getAllCountriesData(sort: String) {
         viewModelScope.launch {
-            repository.getAllCountriesData().collect {
+            repository.getAllCountriesData(sort).collect {
                 _covidAllCountriesData.value = it
             }
         }

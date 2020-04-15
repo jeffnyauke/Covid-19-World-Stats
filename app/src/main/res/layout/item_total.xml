@@ -14,7 +14,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/light_red"
-        android:focusable="true"
         app:layout_constraintEnd_toStartOf="@+id/deathLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

@@ -29,7 +29,6 @@ class TotalAdapter : ListAdapter<Global, TotalAdapter.TotalViewHolder>(DIFF_CALL
     class TotalViewHolder(private val binding: ItemTotalBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(global: Global) {
-            binding.confirmedLayout.requestFocus()
             binding.textLastUpdatedView.text = itemView.context.getString(
                 R.string.text_last_updated,
                 getPeriod(

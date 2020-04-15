@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/navigation_global"
         android:icon="@drawable/ic_global"
@@ -15,5 +14,4 @@
         android:id="@+id/navigation_news"
         android:icon="@drawable/ic_news"
         android:title="@string/title_news" />
-
 </menu>
