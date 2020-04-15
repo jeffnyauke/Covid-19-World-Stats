@@ -14,6 +14,9 @@ interface Covid19StatsApiService {
     @GET("/v2/countries")
     suspend fun getAllCountriesData(@Query("sort") sort: String): Response<List<Country>>
 
+    @GET("/v2/countries/{country}")
+    suspend fun getAllCountriesData(@Path("country") country: String, @Query("strict") strict: Boolean): Response<Country>
+
     @GET("/v2/states")
     suspend fun getAllStatesData(): Response<List<CountryState>>
 

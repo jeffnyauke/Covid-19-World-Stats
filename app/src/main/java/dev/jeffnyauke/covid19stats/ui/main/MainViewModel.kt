@@ -24,6 +24,10 @@ class MainViewModel(private val repository: CovidStatsRepository) : ViewModel() 
     val covidAllCountriesData: LiveData<State<List<Country>>>
         get() = _covidAllCountriesData
 
+    private val _covidAllCountriesDataSearch = MutableLiveData<State<Country>>()
+    val covidAllCountriesDataSearch: LiveData<State<Country>>
+        get() = _covidAllCountriesDataSearch
+
     private val _covidAllStatesData = MutableLiveData<State<List<CountryState>>>()
     val covidAllStatesData: LiveData<State<List<CountryState>>>
         get() = _covidAllStatesData
@@ -48,6 +52,14 @@ class MainViewModel(private val repository: CovidStatsRepository) : ViewModel() 
         viewModelScope.launch {
             repository.getAllCountriesData(sort).collect {
                 _covidAllCountriesData.value = it
+            }
+        }
+    }
+
+    fun getAllCountriesData(country: String, strict: Boolean) {
+        viewModelScope.launch {
+            repository.getAllCountriesData(country, strict).collect {
+                _covidAllCountriesDataSearch.value = it
             }
         }
     }

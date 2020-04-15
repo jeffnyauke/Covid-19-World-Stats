@@ -1,18 +1,17 @@
 package dev.jeffnyauke.covid19stats.ui.main.ui.countries
 
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.MergeAdapter
-import com.google.android.material.transition.MaterialArcMotion
-import com.google.android.material.transition.MaterialContainerTransform
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.FragmentCountryBinding
 import dev.jeffnyauke.covid19stats.model.Country
@@ -82,6 +81,22 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
                 }
             }
         })
+        viewModel.covidAllCountriesDataSearch.observe(viewLifecycleOwner, Observer { state ->
+            when (state) {
+                is State.Loading -> binding.swipeRefreshLayout.isRefreshing = true
+                is State.Error -> binding.swipeRefreshLayout.isRefreshing = true
+                is State.Success -> {
+                    val item = state.data
+                    mCountryAdapter.submitList(listOf(item))
+                    binding.swipeRefreshLayout.isRefreshing = false
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        delay(300L)
+                        mCountryAdapter.notifyDataSetChanged()
+                        binding.recycler.scrollToPosition(0)
+                    }
+                }
+            }
+        })
 
         loadData()
     }
@@ -97,18 +112,36 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
             .navigate(action)
     }
 
-    private fun getTransform(mStartView: View, mEndView: View): MaterialContainerTransform {
-        return MaterialContainerTransform(mStartView.context).apply {
-            startView = mStartView
-            endView = mEndView
-            pathMotion = MaterialArcMotion()
-            duration = 650
-            scrimColor = Color.TRANSPARENT
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_countries_fragment, menu)
+
+        var queryTextChangedJob: Job? = null
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = MenuItemCompat.getActionView(searchItem) as SearchView
+        searchView.queryHint = getString(R.string.search_hint)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.getAllCountriesData(query, false)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (newText.length > 1) {
+                        queryTextChangedJob?.cancel()
+
+                        queryTextChangedJob = lifecycleScope.launch(Dispatchers.Main) {
+                            delay(500)
+                            viewModel.getAllCountriesData(newText, false)
+                        }
+                    }
+                }
+                return false
+            }
+        })
+        return super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

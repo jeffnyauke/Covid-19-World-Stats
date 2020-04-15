@@ -19,4 +19,5 @@
     <string name="extended_fab_filter">Filter</string>
     <string name="title_sort">Sort</string>
     <string name="title_search">Search</string>
+    <string name="search_hint">"Search country by name or ISO i.e. KE or Kenya "</string>
 </resources>
