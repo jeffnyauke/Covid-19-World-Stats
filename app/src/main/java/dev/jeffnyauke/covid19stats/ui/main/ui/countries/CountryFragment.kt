@@ -73,11 +73,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
                     val list = state.data
                     mCountryAdapter.submitList(list)
                     binding.swipeRefreshLayout.isRefreshing = false
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        delay(300L)
-                        mCountryAdapter.notifyDataSetChanged()
-                        binding.recycler.scrollToPosition(0)
-                    }
+                    scrollToTop()
                 }
             }
         })
@@ -89,11 +85,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
                     val item = state.data
                     mCountryAdapter.submitList(listOf(item))
                     binding.swipeRefreshLayout.isRefreshing = false
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        delay(300L)
-                        mCountryAdapter.notifyDataSetChanged()
-                        binding.recycler.scrollToPosition(0)
-                    }
+                    scrollToTop()
                 }
             }
         })
@@ -174,6 +166,13 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
 
         val mDialog = mBuilder.create()
         mDialog.show()
+    }
+
+    private fun scrollToTop() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            delay(300)
+            binding.recycler.scrollToPosition(0)
+        }
     }
 
     object Constants {

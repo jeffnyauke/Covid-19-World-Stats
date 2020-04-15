@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.MergeAdapter
 import dev.jeffnyauke.covid19stats.databinding.FragmentGlobalBinding
 import dev.jeffnyauke.covid19stats.ui.main.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.main.adapter.ChartAdapter
 import dev.jeffnyauke.covid19stats.ui.main.adapter.TotalAdapter
 import dev.jeffnyauke.covid19stats.utils.State
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -71,8 +71,11 @@ class GlobalFragment : Fragment() {
                 }
                 is State.Success -> {
                     val item = state.data
-                    mChartAdapter.submitList(listOf(item))
-                    binding.swipeRefreshLayout.isRefreshing = false
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        delay(500)
+                        mChartAdapter.submitList(listOf(item))
+                        binding.swipeRefreshLayout.isRefreshing = false
+                    }
                 }
             }
         })
