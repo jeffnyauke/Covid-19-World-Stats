@@ -80,7 +80,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
         viewModel.covidAllCountriesDataSearch.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is State.Loading -> binding.swipeRefreshLayout.isRefreshing = true
-                is State.Error -> binding.swipeRefreshLayout.isRefreshing = true
+                is State.Error -> binding.swipeRefreshLayout.isRefreshing = false
                 is State.Success -> {
                     val item = state.data
                     mCountryAdapter.submitList(listOf(item))

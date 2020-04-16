@@ -1,9 +1,12 @@
 package dev.jeffnyauke.covid19stats.ui.main.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.ItemCountryHeaderBinding
 import dev.jeffnyauke.covid19stats.model.Country
 
