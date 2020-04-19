@@ -1,4 +1,4 @@
-package dev.jeffnyauke.covid19stats.ui.main.adapter
+package dev.jeffnyauke.covid19stats.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -6,6 +6,7 @@
     <color name="windowBackground">#F3F3F3</color>
 
     <color name="textColor">@android:color/black</color>
+    <color name="imageBackgroundTint">#C3C3C3</color>
 
     <color name="light_red">#FFCDD2</color>
     <color name="light_green">#C8E6C9</color>

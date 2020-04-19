@@ -16,7 +16,7 @@ import androidx.work.WorkerParameters
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.model.Global
 import dev.jeffnyauke.covid19stats.repository.CovidStatsRepository
-import dev.jeffnyauke.covid19stats.ui.main.MainActivity
+import dev.jeffnyauke.covid19stats.ui.MainActivity
 import dev.jeffnyauke.covid19stats.utils.State
 import dev.jeffnyauke.covid19stats.utils.getFormattedNumber
 import dev.jeffnyauke.covid19stats.utils.getPeriod

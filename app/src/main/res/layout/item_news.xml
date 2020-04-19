@@ -20,7 +20,7 @@
         tools:text="@tools:sample/lorem" />
 
     <TextView
-        android:id="@+id/post_author"
+        android:id="@+id/post_date"
         style="@style/NewsDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

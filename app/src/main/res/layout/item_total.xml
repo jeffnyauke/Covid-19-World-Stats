@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/dimen_4"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.MainActivity">
 
     <LinearLayout
         android:id="@+id/confirmedLayout"

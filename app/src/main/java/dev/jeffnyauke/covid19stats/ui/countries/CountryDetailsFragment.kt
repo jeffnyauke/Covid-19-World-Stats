@@ -1,4 +1,4 @@
-package dev.jeffnyauke.covid19stats.ui.main.ui.countries
+package dev.jeffnyauke.covid19stats.ui.countries
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,11 +12,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.MergeAdapter
 import dev.jeffnyauke.covid19stats.databinding.FragmentCountryDetailsBinding
-import dev.jeffnyauke.covid19stats.ui.main.MainActivity
-import dev.jeffnyauke.covid19stats.ui.main.MainViewModel
-import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryChartAdapter
-import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryHeaderAdapter
-import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryTotalAdapter
+import dev.jeffnyauke.covid19stats.ui.MainActivity
+import dev.jeffnyauke.covid19stats.ui.MainViewModel
+import dev.jeffnyauke.covid19stats.ui.adapter.CountryChartAdapter
+import dev.jeffnyauke.covid19stats.ui.adapter.CountryHeaderAdapter
+import dev.jeffnyauke.covid19stats.ui.adapter.CountryTotalAdapter
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi

@@ -1,4 +1,4 @@
-package dev.jeffnyauke.covid19stats.ui.main.adapter
+package dev.jeffnyauke.covid19stats.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,17 +12,18 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import dev.jeffnyauke.covid19stats.R
-import dev.jeffnyauke.covid19stats.databinding.ItemChartBinding
-import dev.jeffnyauke.covid19stats.model.Timeline
+import dev.jeffnyauke.covid19stats.databinding.ItemCountryChartBinding
+import dev.jeffnyauke.covid19stats.model.History
 import dev.jeffnyauke.covid19stats.utils.CustomMarker
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CALLBACK) {
+class CountryChartAdapter :
+    ListAdapter<History, CountryChartAdapter.ChartViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ChartViewHolder(
-        ItemChartBinding.inflate(
+        ItemCountryChartBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -33,27 +34,29 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
         holder.bind(getItem(position))
 
 
-    class ChartViewHolder(private val binding: ItemChartBinding) :
+    class ChartViewHolder(private val binding: ItemCountryChartBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         private val mFormat = SimpleDateFormat("MM/dd/yy", Locale.ENGLISH)
 
-        fun bind(timeline: Timeline) {
+        fun bind(history: History) {
+            binding.textCasesTitle.text = "Country Cases"
+
             val entriesCases = ArrayList<Entry>()
             val entriesDeaths = ArrayList<Entry>()
             val entriesRecoveries = ArrayList<Entry>()
 
-            timeline.cases?.entries?.forEach {
+            history.timeline?.cases?.entries?.forEach {
                 val date = mFormat.parse(it.key)
                 entriesCases.add(Entry(date.time.toFloat(), it.value.toFloat()))
             }
 
-            timeline.deaths?.entries?.forEach {
+            history.timeline?.deaths?.entries?.forEach {
                 val date = mFormat.parse(it.key)
                 entriesDeaths.add(Entry(date.time.toFloat(), it.value.toFloat()))
             }
 
-            timeline.recovered?.entries?.forEach {
+            history.timeline?.recovered?.entries?.forEach {
                 val date = mFormat.parse(it.key)
                 entriesRecoveries.add(Entry(date.time.toFloat(), it.value.toFloat()))
             }
@@ -121,7 +124,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
 
             //Part3
             chart.xAxis.labelRotationAngle = 0f
-            chart.xAxis.granularity = 1000f
+            chart.xAxis.granularity = 2000f
             chart.xAxis.setDrawGridLines(false)
             chart.xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
@@ -138,7 +141,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
 
             //Part7
             chart.axisRight.isEnabled = false
-            chart.xAxis.axisMaximum = entriesCases.last().x + 720f
+            chart.xAxis.axisMaximum = entriesCases.last().x + 2000f
             chart.description.isEnabled = false
 
             //Part8
@@ -181,7 +184,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
 
             //Part3
             chart.xAxis.labelRotationAngle = 0f
-            chart.xAxis.granularity = 2000f
+            chart.xAxis.granularity = 1000f
             chart.xAxis.setDrawGridLines(false)
             chart.xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
@@ -198,7 +201,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
 
             //Part7
             chart.axisRight.isEnabled = false
-            chart.xAxis.axisMaximum = entries.last().x + 2000f
+            chart.xAxis.axisMaximum = entries.last().x + 720f
             chart.description.isEnabled = false
 
             //Part8
@@ -219,11 +222,11 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Timeline>() {
-            override fun areItemsTheSame(oldItem: Timeline, newItem: Timeline): Boolean =
-                oldItem.cases == newItem.cases
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<History>() {
+            override fun areItemsTheSame(oldItem: History, newItem: History): Boolean =
+                oldItem.timeline?.cases == newItem.timeline?.cases
 
-            override fun areContentsTheSame(oldItem: Timeline, newItem: Timeline): Boolean =
+            override fun areContentsTheSame(oldItem: History, newItem: History): Boolean =
                 oldItem == newItem
 
         }

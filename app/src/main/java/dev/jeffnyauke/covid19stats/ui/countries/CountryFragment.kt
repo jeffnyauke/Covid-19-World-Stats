@@ -1,4 +1,4 @@
-package dev.jeffnyauke.covid19stats.ui.main.ui.countries
+package dev.jeffnyauke.covid19stats.ui.countries
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -16,8 +16,8 @@ import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.FragmentCountryBinding
 import dev.jeffnyauke.covid19stats.model.Country
 import dev.jeffnyauke.covid19stats.model.enums.Order
-import dev.jeffnyauke.covid19stats.ui.main.MainViewModel
-import dev.jeffnyauke.covid19stats.ui.main.adapter.CountryAdapter
+import dev.jeffnyauke.covid19stats.ui.MainViewModel
+import dev.jeffnyauke.covid19stats.ui.adapter.CountryAdapter
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.get
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.set

@@ -1,4 +1,4 @@
-package dev.jeffnyauke.covid19stats.ui.main
+package dev.jeffnyauke.covid19stats.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

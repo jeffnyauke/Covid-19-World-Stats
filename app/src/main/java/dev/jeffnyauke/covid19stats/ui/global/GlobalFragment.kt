@@ -1,4 +1,4 @@
-package dev.jeffnyauke.covid19stats.ui.main.ui.global
+package dev.jeffnyauke.covid19stats.ui.global
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.MergeAdapter
 import dev.jeffnyauke.covid19stats.databinding.FragmentGlobalBinding
-import dev.jeffnyauke.covid19stats.ui.main.MainViewModel
-import dev.jeffnyauke.covid19stats.ui.main.adapter.ChartAdapter
-import dev.jeffnyauke.covid19stats.ui.main.adapter.TotalAdapter
+import dev.jeffnyauke.covid19stats.ui.MainViewModel
+import dev.jeffnyauke.covid19stats.ui.adapter.ChartAdapter
+import dev.jeffnyauke.covid19stats.ui.adapter.TotalAdapter
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.*
 import org.koin.android.viewmodel.ext.android.viewModel

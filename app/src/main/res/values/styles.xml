@@ -28,10 +28,9 @@
 
     <style name="TextStateName">
         <item name="android:layout_gravity">center</item>
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1
         </item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
     <style name="TextLastUpdatedTime">
@@ -89,9 +88,10 @@
         <item name="android:layout_marginStart">@dimen/dimen_16</item>
         <item name="android:layout_marginTop">@dimen/dimen_16</item>
         <item name="android:layout_marginEnd">@dimen/dimen_8</item>
-        <item name="android:maxLines">2</item>
+        <item name="android:maxLines">3</item>
         <item name="android:textColor">@color/textColor</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1
+        </item>
     </style>
 
     <style name="NewsDateText">

@@ -1,6 +1,6 @@
 package dev.jeffnyauke.covid19stats.di
 
-import dev.jeffnyauke.covid19stats.ui.main.MainViewModel
+import dev.jeffnyauke.covid19stats.ui.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.android.viewmodel.dsl.viewModel

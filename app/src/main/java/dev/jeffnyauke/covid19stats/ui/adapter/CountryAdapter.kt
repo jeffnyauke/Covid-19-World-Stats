@@ -1,4 +1,4 @@
-package dev.jeffnyauke.covid19stats.ui.main.adapter
+package dev.jeffnyauke.covid19stats.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -50,6 +50,7 @@ class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
             binding.imageFlag.load(country.countryInfo?.flag) {
                 crossfade(true)
                 placeholder(R.color.white)
+                error(R.color.white)
             }
 
             onItemClickListener?.let { listener ->

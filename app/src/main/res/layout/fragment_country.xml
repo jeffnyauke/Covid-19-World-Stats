@@ -15,12 +15,13 @@
             android:id="@+id/parentLayout"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            tools:context=".ui.main.MainActivity">
+            tools:context=".ui.MainActivity">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_height="match_parent"
                 android:id="@+id/recycler"
                 android:clipToPadding="false"
+                android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
