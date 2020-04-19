@@ -52,4 +52,25 @@ class CovidStatsRepository(private val apiService: Covid19StatsApiService) {
                 apiService.getCountryHistoricalData(country)
         }.asFlow().flowOn(Dispatchers.IO)
     }
+
+    fun getNews(url: String): Flow<State<NewsResponse>> {
+        return object : NetworkBoundRepository<NewsResponse>() {
+            override suspend fun fetchFromRemote(): Response<NewsResponse> =
+                apiService.getNews(url)
+        }.asFlow().flowOn(Dispatchers.IO)
+    }
+
+    fun getFaqs(url: String): Flow<State<FaqResponse>> {
+        return object : NetworkBoundRepository<FaqResponse>() {
+            override suspend fun fetchFromRemote(): Response<FaqResponse> =
+                apiService.getFaqs(url)
+        }.asFlow().flowOn(Dispatchers.IO)
+    }
+
+    fun getProtectiveMeasures(url: String): Flow<State<ProtectiveMeasures>> {
+        return object : NetworkBoundRepository<ProtectiveMeasures>() {
+            override suspend fun fetchFromRemote(): Response<ProtectiveMeasures> =
+                apiService.getProtectiveMeasures(url)
+        }.asFlow().flowOn(Dispatchers.IO)
+    }
 }

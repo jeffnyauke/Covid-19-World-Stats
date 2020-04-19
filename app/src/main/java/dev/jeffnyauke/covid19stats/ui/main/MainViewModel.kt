@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.jeffnyauke.covid19stats.api.Covid19StatsApiService
 import dev.jeffnyauke.covid19stats.model.*
 import dev.jeffnyauke.covid19stats.repository.CovidStatsRepository
 import dev.jeffnyauke.covid19stats.utils.State
@@ -39,6 +40,18 @@ class MainViewModel(private val repository: CovidStatsRepository) : ViewModel() 
     private val _covidAllHistoricalData = MutableLiveData<State<Timeline>>()
     val covidAllHistoricalData: LiveData<State<Timeline>>
         get() = _covidAllHistoricalData
+
+    private val _newsData = MutableLiveData<State<NewsResponse>>()
+    val newsData: LiveData<State<NewsResponse>>
+        get() = _newsData
+
+    private val _faqsData = MutableLiveData<State<FaqResponse>>()
+    val faqsData: LiveData<State<FaqResponse>>
+        get() = _faqsData
+
+    private val _protectiveMeasuresData = MutableLiveData<State<ProtectiveMeasures>>()
+    val protectiveMeasuresData: LiveData<State<ProtectiveMeasures>>
+        get() = _protectiveMeasuresData
 
     fun getGlobalData() {
         viewModelScope.launch {
@@ -85,6 +98,31 @@ class MainViewModel(private val repository: CovidStatsRepository) : ViewModel() 
             repository.getAllHistoricalData().collect {
                 _covidAllHistoricalData.value = it
             }
+        }
+    }
+
+    fun getNewsData() {
+        viewModelScope.launch {
+            repository.getNews(Covid19StatsApiService.NEWS_URL).collect {
+                _newsData.value = it
+            }
+        }
+    }
+
+    fun getFaqsData() {
+        viewModelScope.launch {
+            repository.getFaqs(Covid19StatsApiService.FAQS_URL).collect {
+                _faqsData.value = it
+            }
+        }
+    }
+
+    fun getProtectiveMeasuresData() {
+        viewModelScope.launch {
+            repository.getProtectiveMeasures(Covid19StatsApiService.PROTECTIVE_MEASURES_URL)
+                .collect {
+                    _protectiveMeasuresData.value = it
+                }
         }
     }
 }
