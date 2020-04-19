@@ -213,7 +213,10 @@ class CountryChartAdapter :
             chart.setNoDataText("No cases yet!")
 
             //Part10
+            binding.lineChartCombined.animateX(1500, Easing.EaseInExpo)
             binding.lineChartCases.animateX(1500, Easing.EaseInExpo)
+            binding.lineChartDeaths.animateX(1500, Easing.EaseInExpo)
+            binding.lineChartRecoveries.animateX(1500, Easing.EaseInExpo)
 
             //Part11
             val markerView = CustomMarker(binding.root.context, R.layout.marker_view)
