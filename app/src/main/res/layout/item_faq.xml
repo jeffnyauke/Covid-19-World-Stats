@@ -52,7 +52,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textColor="@color/textColor"
+                android:textColor="@color/textColorFaq"
                 tools:text="@tools:sample/lorem/random" />
 
             <!-- HEADER INDICATOR -->

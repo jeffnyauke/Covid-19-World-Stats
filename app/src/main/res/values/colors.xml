@@ -28,6 +28,7 @@
     <color name="post_background">@android:color/white</color>
 
     <color name="textColor">@android:color/black</color>
+    <color name="textColorFaq">#3E3E3E</color>
     <color name="textColorSecondary">@android:color/secondary_text_light</color>
     <color name="imageBackgroundTint">#C3C3C3</color>
 
