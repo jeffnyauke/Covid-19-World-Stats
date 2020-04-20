@@ -9,7 +9,12 @@
         android:id="@+id/navigation_global"
         android:name="dev.jeffnyauke.covid19stats.ui.global.GlobalFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_global" />
+        tools:layout="@layout/fragment_global">
+        <action
+            android:id="@+id/action_GlobalFragment_to_FaqsFragment"
+            app:destination="@id/navigation_faqs" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_country_details"
         android:name="dev.jeffnyauke.covid19stats.ui.countries.CountryDetailsFragment"
@@ -33,5 +38,15 @@
         android:id="@+id/navigation_news"
         android:name="dev.jeffnyauke.covid19stats.ui.news.NewsFragment"
         android:label="@string/title_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news">
+        <action
+            android:id="@+id/action_NewsFragment_to_FaqsFragment"
+            app:destination="@id/navigation_faqs" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_faqs"
+        android:name="dev.jeffnyauke.covid19stats.ui.faqs.FaqsFragment"
+        android:label="@string/title_faqs"
+        tools:layout="@layout/fragment_faqs" />
 </navigation>

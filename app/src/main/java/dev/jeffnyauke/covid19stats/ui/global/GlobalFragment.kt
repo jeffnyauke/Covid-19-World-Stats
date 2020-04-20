@@ -1,14 +1,14 @@
 package dev.jeffnyauke.covid19stats.ui.global
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.MergeAdapter
+import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.FragmentGlobalBinding
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.adapter.ChartAdapter
@@ -28,6 +28,11 @@ class GlobalFragment : Fragment() {
     private val mTotalAdapter = TotalAdapter()
     private val mChartAdapter = ChartAdapter()
     private val adapter = MergeAdapter(mTotalAdapter, mChartAdapter)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,5 +91,23 @@ class GlobalFragment : Fragment() {
     private fun loadData() {
         viewModel.getGlobalData()
         viewModel.getAllHistoricalData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_faqs -> {
+                val action = GlobalFragmentDirections
+                    .actionGlobalFragmentToFaqsFragment()
+                NavHostFragment.findNavController(this@GlobalFragment)
+                    .navigate(action)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

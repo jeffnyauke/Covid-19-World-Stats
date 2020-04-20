@@ -6,5 +6,5 @@ data class FaqResponse(
     @Json(name = "source")
     var source: String? = null,
     @Json(name = "data")
-    var data: List<FaqData>? = null
+    var data: List<FaqsData>? = null
 )
