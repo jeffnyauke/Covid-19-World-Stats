@@ -1,23 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/light_yellow</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/windowLightStatusBar
+        </item>
 
-        <item name="android:toolbarStyle">@style/Widget.App.Toolbar</item>
         <item name="fontFamily">@font/google_sans</item>
     </style>
-
-    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
-        <item name="titleTextAppearance">@style/TextToolbar</item>
-    </style>
-
-    <style name="TextToolbar" parent="TextAppearance.MaterialComponents.Headline6" />
 
     <style name="TextTitle">
         <item name="android:layout_gravity">center</item>

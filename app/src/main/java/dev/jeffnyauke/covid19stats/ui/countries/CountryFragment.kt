@@ -18,11 +18,11 @@ import dev.jeffnyauke.covid19stats.model.Country
 import dev.jeffnyauke.covid19stats.model.enums.Order
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.adapter.CountryAdapter
-import dev.jeffnyauke.covid19stats.utils.PreferenceHelper
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.get
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.set
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -36,7 +36,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
 
     private val mCountryAdapter = CountryAdapter(onItemClickListener = this)
     private val adapter = MergeAdapter(mCountryAdapter)
-    private lateinit var prefs: SharedPreferences
+    private val prefs: SharedPreferences by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,6 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCountryBinding.inflate(inflater, container, false)
-        prefs = PreferenceHelper.defaultPrefs(requireContext())
         binding.recycler.adapter = adapter
 
         initData()
@@ -143,6 +142,20 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
             }
             R.id.action_sort -> {
                 displayDialog()
+                true
+            }
+            R.id.action_faqs -> {
+                val action = CountryFragmentDirections
+                    .actionCountryFragmentToFaqsFragment()
+                NavHostFragment.findNavController(this@CountryFragment)
+                    .navigate(action)
+                true
+            }
+            R.id.action_settings -> {
+                val action = CountryFragmentDirections
+                    .actionCountryFragmentToSettingsFragment()
+                NavHostFragment.findNavController(this@CountryFragment)
+                    .navigate(action)
                 true
             }
             else -> super.onOptionsItemSelected(item)

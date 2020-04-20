@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.preference.PreferenceCategory android:title="@string/settings_category_notifications">
+
+        <androidx.preference.SwitchPreference
+            android:icon="@drawable/ic_twotone_notifications"
+            android:key="@string/pref_key_notifications"
+            android:persistent="true"
+            android:summary="@string/settings_notifications_description"
+            android:title="@string/settings_notifications_title" />
+
+        <androidx.preference.ListPreference
+            android:dialogTitle="@string/settings_notifications_frequency_title"
+            android:entries="@array/intervals"
+            android:entryValues="@array/interval_values"
+            android:icon="@drawable/ic_twotone_timer"
+            android:key="@string/pref_key_crash_reports"
+            android:summary="@string/settings_notifications_frequency_description"
+            android:title="@string/settings_notifications_frequency_title" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="@string/settings_category_user_data">
+
+        <androidx.preference.SwitchPreference
+            android:icon="@drawable/ic_twotone_trending"
+            android:key="@string/pref_key_analytics"
+            android:persistent="true"
+            android:summary="@string/settings_analytics_description"
+            android:title="@string/settings_analytics_title" />
+
+        <androidx.preference.SwitchPreference
+            android:icon="@drawable/ic_twotone_bug_report"
+            android:key="@string/pref_key_crash_reports"
+            android:persistent="true"
+            android:summary="@string/settings_crash_reporting_description"
+            android:title="@string/settings_crash_reporting_title" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="@string/settings_category_theme">
+        <androidx.preference.ListPreference
+            android:dialogTitle="@string/settings_pick_theme"
+            android:entries="@array/themes"
+            android:entryValues="@array/themes_values"
+            android:icon="@drawable/ic_twotone_theme"
+            android:key="@string/pref_key_theme_picker"
+            android:title="@string/settings_pick_theme" />
+
+    </androidx.preference.PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

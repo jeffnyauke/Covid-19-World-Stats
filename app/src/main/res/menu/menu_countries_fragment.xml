@@ -15,4 +15,13 @@
         android:title="@string/title_sort"
         app:showAsAction="collapseActionView|ifRoom" />
 
+    <item
+        android:id="@+id/action_faqs"
+        android:title="@string/title_faqs"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/title_settings"
+        app:showAsAction="never" />
 </menu>

@@ -7,4 +7,8 @@
         android:title="@string/title_faqs"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/title_settings"
+        app:showAsAction="never" />
 </menu>

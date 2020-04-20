@@ -103,6 +103,13 @@ class NewsFragment : Fragment(), NewsAdapter.OnItemClickListener {
                     .navigate(action)
                 true
             }
+            R.id.action_settings -> {
+                val action = NewsFragmentDirections
+                    .actionNewsFragmentToSettingsFragment()
+                NavHostFragment.findNavController(this@NewsFragment)
+                    .navigate(action)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

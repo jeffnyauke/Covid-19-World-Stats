@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="themes">
+        <item>@string/settings_theme_default</item>
+        <item>@string/settings_theme_dark</item>
+        <item>@string/settings_theme_light</item>
+    </string-array>
+
+    <string-array name="themes_values">
+        <item>@string/theme_value_default</item>
+        <item>@string/theme_value_dark</item>
+        <item>@string/theme_value_light</item>
+    </string-array>
+
+    <string-array name="intervals">
+        <item>@string/settings_interval_half_hour</item>
+        <item>@string/settings_interval_one_hour</item>
+        <item>@string/settings_interval_one_day</item>
+        <item>@string/settings_interval_one_week</item>
+    </string-array>
+
+    <string-array name="interval_values">
+        <item>@string/interval_value_half_hour</item>
+        <item>@string/interval_value_one_hour</item>
+        <item>@string/interval_value_one_day</item>
+        <item>@string/interval_value_one_week</item>
+    </string-array>
+
+</resources>

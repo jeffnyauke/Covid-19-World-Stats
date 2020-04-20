@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_GlobalFragment_to_FaqsFragment"
             app:destination="@id/navigation_faqs" />
+        <action
+            android:id="@+id/action_GlobalFragment_to_SettingsFragment"
+            app:destination="@id/navigation_settings" />
     </fragment>
 
     <fragment
@@ -32,6 +35,12 @@
         <action
             android:id="@+id/action_CountryFragment_to_CountryDetailsFragment"
             app:destination="@id/navigation_country_details" />
+        <action
+            android:id="@+id/action_CountryFragment_to_FaqsFragment"
+            app:destination="@id/navigation_faqs" />
+        <action
+            android:id="@+id/action_CountryFragment_to_SettingsFragment"
+            app:destination="@id/navigation_settings" />
     </fragment>
 
     <fragment
@@ -42,6 +51,9 @@
         <action
             android:id="@+id/action_NewsFragment_to_FaqsFragment"
             app:destination="@id/navigation_faqs" />
+        <action
+            android:id="@+id/action_NewsFragment_to_SettingsFragment"
+            app:destination="@id/navigation_settings" />
     </fragment>
 
     <fragment
@@ -49,4 +61,9 @@
         android:name="dev.jeffnyauke.covid19stats.ui.faqs.FaqsFragment"
         android:label="@string/title_faqs"
         tools:layout="@layout/fragment_faqs" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="dev.jeffnyauke.covid19stats.ui.settings.SettingsFragment"
+        android:label="@string/title_settings" />
 </navigation>

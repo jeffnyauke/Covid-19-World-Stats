@@ -107,6 +107,13 @@ class GlobalFragment : Fragment() {
                     .navigate(action)
                 true
             }
+            R.id.action_settings -> {
+                val action = GlobalFragmentDirections
+                    .actionGlobalFragmentToSettingsFragment()
+                NavHostFragment.findNavController(this@GlobalFragment)
+                    .navigate(action)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

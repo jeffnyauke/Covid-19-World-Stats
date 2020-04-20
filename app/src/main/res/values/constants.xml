@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_value_default" translatable="false">theme_default</string>
+    <string name="theme_value_dark" translatable="false">theme_dark</string>
+    <string name="theme_value_light" translatable="false">theme_light</string>
+
+    <string name="interval_value_half_hour" translatable="false">30</string>
+    <string name="interval_value_one_hour" translatable="false">60</string>
+    <string name="interval_value_one_day" translatable="false">1440</string>
+    <string name="interval_value_one_week" translatable="false">10080</string>
+
+    <string name="pref_key_analytics" translatable="false">pref_analytics</string>
+    <string name="pref_key_crash_reports" translatable="false">pref_crash_reports</string>
+    <string name="pref_key_theme_picker" translatable="false">pref_theme_picker</string>
+    <string name="pref_key_notifications" translatable="false">pref_key_notifications</string>
+    <string name="pref_key_intervals" translatable="false">pref_key_intervals</string>
+</resources>
