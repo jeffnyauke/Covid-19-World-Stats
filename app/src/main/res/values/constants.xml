@@ -31,4 +31,13 @@
     <string name="pref_key_theme_picker" translatable="false">pref_theme_picker</string>
     <string name="pref_key_notifications" translatable="false">pref_key_notifications</string>
     <string name="pref_key_intervals" translatable="false">pref_key_intervals</string>
+    <string name="pref_key_send_feedback" translatable="false">pref_key_send_feedback</string>
+    <string name="pref_key_version" translatable="false">pref_key_version</string>
+
+    <string name="pref_sort" translatable="false">pref_sort</string>
+
+    <string name="url_privacy">https://covid-19-stats-0.flycricket.io/privacy.html</string>
+    <string name="url_terms">https://covid-19-stats-0.flycricket.io/terms.html</string>
+    <string name="url_github">https://github.com/jeffnyauke</string>
+    <string name="url_github_project">https://github.com/jeffnyauke/Covid-19-World-Stats</string>
 </resources>

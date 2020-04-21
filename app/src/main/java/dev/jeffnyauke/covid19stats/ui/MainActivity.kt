@@ -24,15 +24,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.*
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.ActivityMainBinding
-import dev.jeffnyauke.covid19stats.worker.NotificationWorker
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
-import java.util.concurrent.TimeUnit
 
 @ExperimentalCoroutinesApi
 @InternalCoroutinesApi
@@ -56,30 +52,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
-        MobileAds.initialize(this, OnInitializationCompleteListener { initializationStatus ->
-        });
+        MobileAds.initialize(this) { initializationStatus ->
+        }
 
-        initWorker()
-    }
-
-    private fun initWorker() {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val notificationWorkRequest =
-            PeriodicWorkRequestBuilder<NotificationWorker>(30, TimeUnit.MINUTES)
-                .setConstraints(constraints)
-                .build()
-
-        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
-            JOB_TAG,
-            ExistingPeriodicWorkPolicy.KEEP,
-            notificationWorkRequest
-        )
-    }
-
-    companion object {
-        const val JOB_TAG = "notificationWorkTag"
     }
 }

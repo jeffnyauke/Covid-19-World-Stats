@@ -23,7 +23,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/light_yellow</item>
+        <item name="colorAccent">@color/dark_yellow</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/windowLightStatusBar
         </item>

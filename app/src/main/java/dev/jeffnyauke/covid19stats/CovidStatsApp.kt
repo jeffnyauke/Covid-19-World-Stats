@@ -30,6 +30,8 @@ import dev.jeffnyauke.covid19stats.ui.settings.di.settingsModule
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.get
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.set
 import dev.jeffnyauke.covid19stats.utils.di.utilsModule
+import dev.jeffnyauke.covid19stats.worker.NotificationWorkerManager
+import dev.jeffnyauke.covid19stats.worker.di.syncModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.android.ext.android.inject
@@ -43,7 +45,14 @@ class CovidStatsApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(networkModule, viewModelModule, analyticsModule, settingsModule, utilsModule)
+            modules(
+                networkModule,
+                viewModelModule,
+                analyticsModule,
+                settingsModule,
+                utilsModule,
+                syncModule
+            )
         }
 
         val tracker: Tracker by inject()
@@ -52,14 +61,33 @@ class CovidStatsApp : Application() {
         val crashReport: CrashReport by inject()
         crashReport.initialize()
 
-        val sharedPreferences: SharedPreferences by inject()
-        val keyThemePicker = getString(R.string.pref_key_theme_picker)
+        val prefs: SharedPreferences by inject()
+        val notificationWorkerManager: NotificationWorkerManager by inject()
 
-        if (!sharedPreferences.contains(keyThemePicker)) {
-            sharedPreferences[keyThemePicker] = getString(R.string.theme_value_default)
+        val keyThemePicker = getString(R.string.pref_key_theme_picker)
+        val keyShowNotifications = getString(R.string.pref_key_notifications)
+        val keyInterval = getString(R.string.pref_key_intervals)
+
+        if (!prefs.contains(keyShowNotifications)) {
+            prefs[keyShowNotifications] = true
+        }
+
+        val showNotifications = prefs[keyShowNotifications, true]!!
+        if (showNotifications) {
+            if (!prefs.contains(keyInterval)) {
+                prefs[keyInterval] = getString(R.string.interval_value_half_hour)
+            }
+
+            val interval = prefs[keyInterval, getString(R.string.interval_value_half_hour)]
+            notificationWorkerManager.initialize(interval!!.toLong())
+            notificationWorkerManager.start()
+        }
+
+        if (!prefs.contains(keyThemePicker)) {
+            prefs[keyThemePicker] = getString(R.string.theme_value_light)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         } else {
-            val theme = sharedPreferences[keyThemePicker, getString(R.string.theme_value_default)]
+            val theme = prefs[keyThemePicker, getString(R.string.theme_value_light)]
             val newMode = when (theme) {
                 getString(R.string.theme_value_dark) -> AppCompatDelegate.MODE_NIGHT_YES
                 getString(R.string.theme_value_light) -> AppCompatDelegate.MODE_NIGHT_NO

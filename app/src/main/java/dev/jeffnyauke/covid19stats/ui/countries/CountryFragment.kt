@@ -111,7 +111,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
     }
 
     private fun loadData() {
-        viewModel.getAllCountriesData(prefs[Constants.PREFERENCE_SORT, Order.CASES.tag]!!)
+        viewModel.getAllCountriesData(prefs[getString(R.string.pref_sort), Order.CASES.tag]!!)
     }
 
     override fun onItemClicked(country: Country) {
@@ -188,9 +188,9 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
         mBuilder.setTitle("Sort according to:")
         mBuilder.setSingleChoiceItems(
             listItemsDesc,
-            listItemsTags.indexOf(prefs[Constants.PREFERENCE_SORT, Order.CASES.tag]!!)
+            listItemsTags.indexOf(prefs[getString(R.string.pref_sort), Order.CASES.tag]!!)
         ) { dialogInterface, i ->
-            prefs[Constants.PREFERENCE_SORT] = Order.valueOf(listItemsNames[i]).tag
+            prefs[getString(R.string.pref_sort)] = Order.valueOf(listItemsNames[i]).tag
             loadData()
             dialogInterface.dismiss()
         }
@@ -204,9 +204,5 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
             delay(300)
             binding.recycler.scrollToPosition(0)
         }
-    }
-
-    object Constants {
-        const val PREFERENCE_SORT = "PREFERENCE_SORT"
     }
 }
