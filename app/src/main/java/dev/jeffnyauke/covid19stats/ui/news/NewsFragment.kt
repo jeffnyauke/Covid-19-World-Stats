@@ -19,6 +19,7 @@
 package dev.jeffnyauke.covid19stats.ui.news
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -32,9 +33,12 @@ import dev.jeffnyauke.covid19stats.databinding.FragmentNewsBinding
 import dev.jeffnyauke.covid19stats.model.NewsData
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.adapter.NewsAdapter
+import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.get
+import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.set
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -44,6 +48,7 @@ class NewsFragment : Fragment(), NewsAdapter.OnItemClickListener {
     private lateinit var binding: FragmentNewsBinding
 
     private val viewModel: MainViewModel by viewModel()
+    private val prefs: SharedPreferences by inject()
 
     private val mNewsAdapter = NewsAdapter(onItemClickListener = this)
     private val adapter = MergeAdapter(mNewsAdapter)
@@ -67,6 +72,23 @@ class NewsFragment : Fragment(), NewsAdapter.OnItemClickListener {
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadData()
         }
+
+        binding.toggleButton.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.buttonWorld -> {
+                        prefs[getString(R.string.pref_news_type)] = 0
+                        loadData()
+                    }
+
+                    R.id.buttonWho -> {
+                        prefs[getString(R.string.pref_news_type)] = 1
+                        loadData()
+                    }
+                }
+            }
+        }
+
         return binding.root
     }
 
@@ -90,7 +112,13 @@ class NewsFragment : Fragment(), NewsAdapter.OnItemClickListener {
     }
 
     private fun loadData() {
-        viewModel.getNewsData()
+        if (prefs[getString(R.string.pref_news_type), 0] == 0) {
+            viewModel.getWorldNewsData()
+            binding.toggleButton.check(R.id.buttonWorld)
+        } else {
+            viewModel.getNewsData()
+            binding.toggleButton.check(R.id.buttonWho)
+        }
     }
 
     override fun onItemClicked(post: NewsData) {

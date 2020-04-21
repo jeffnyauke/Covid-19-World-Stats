@@ -51,10 +51,10 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
     private lateinit var binding: FragmentCountryBinding
 
     private val viewModel: MainViewModel by viewModel()
+    private val prefs: SharedPreferences by inject()
 
     private val mCountryAdapter = CountryAdapter(onItemClickListener = this)
     private val adapter = MergeAdapter(mCountryAdapter)
-    private val prefs: SharedPreferences by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

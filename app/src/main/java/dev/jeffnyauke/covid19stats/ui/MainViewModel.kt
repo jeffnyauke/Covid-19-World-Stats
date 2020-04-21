@@ -127,6 +127,14 @@ class MainViewModel(private val repository: CovidStatsRepository) : ViewModel() 
         }
     }
 
+    fun getWorldNewsData() {
+        viewModelScope.launch {
+            repository.getWorldNews(Covid19StatsApiService.WORLD_NEWS_URL).collect {
+                _newsData.value = it
+            }
+        }
+    }
+
     fun getFaqsData() {
         viewModelScope.launch {
             repository.getFaqs(Covid19StatsApiService.FAQS_URL).collect {

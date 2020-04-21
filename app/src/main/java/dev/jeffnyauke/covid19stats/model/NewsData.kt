@@ -26,6 +26,8 @@ data class NewsData(
     @Json(name = "link")
     var link: String? = null,
     @Json(name = "date")
-    var date: String? = null
+    var date: String? = null,
+    @Json(name = "image")
+    var image: String? = null
 
 )

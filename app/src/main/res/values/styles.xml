@@ -100,16 +100,20 @@
     <style name="NewsTitleText">
         <item name="android:layout_marginStart">@dimen/dimen_16</item>
         <item name="android:layout_marginTop">@dimen/dimen_16</item>
-        <item name="android:layout_marginEnd">@dimen/dimen_8</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_16</item>
         <item name="android:maxLines">3</item>
         <item name="android:textColor">@color/textColor</item>
+        <item name="android:ellipsize">end</item>
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1
         </item>
     </style>
 
     <style name="NewsDateText">
         <item name="android:layout_marginStart">@dimen/dimen_16</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_16</item>
         <item name="android:layout_marginTop">@dimen/dimen_8</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
     <style name="PostImage">

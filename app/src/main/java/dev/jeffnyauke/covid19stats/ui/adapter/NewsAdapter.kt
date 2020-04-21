@@ -51,6 +51,7 @@ class NewsAdapter(private val onItemClickListener: OnItemClickListener) :
         fun bind(news: NewsData, onItemClickListener: OnItemClickListener? = null) {
             binding.postTitle.text = news.title
             binding.postDate.text = news.date
+
             binding.imageView.load(R.drawable.corona) {
                 crossfade(true)
                 placeholder(R.drawable.ic_photo)

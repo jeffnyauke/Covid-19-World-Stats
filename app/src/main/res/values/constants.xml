@@ -35,6 +35,7 @@
     <string name="pref_key_version" translatable="false">pref_key_version</string>
 
     <string name="pref_sort" translatable="false">pref_sort</string>
+    <string name="pref_news_type" translatable="false">pref_news_type</string>
 
     <string name="url_privacy">https://covid-19-stats-0.flycricket.io/privacy.html</string>
     <string name="url_terms">https://covid-19-stats-0.flycricket.io/terms.html</string>

@@ -58,6 +58,8 @@ interface Covid19StatsApiService {
         const val BASE_URL = "https://corona.lmao.ninja/"
         const val FAQS_URL = "http://covid19-news.herokuapp.com/api/covid19/faqs"
         const val NEWS_URL = "http://covid19-news.herokuapp.com/api/covid19/news"
+        const val WORLD_NEWS_URL =
+            "http://news.google.com/news?q=covid-19&hl=en-US&sort=date&gl=US&num=100&output=rss"
         const val PROTECTIVE_MEASURES_URL =
             "http://covid19-news.herokuapp.com/api/covid19/protective-measures"
     }

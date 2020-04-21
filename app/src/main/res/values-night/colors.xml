@@ -25,7 +25,7 @@
 
     <color name="textColor">@android:color/white</color>
     <color name="textColorFaq">@android:color/white</color>
-    <color name="navigationBackground">#001719</color>
+    <color name="backgroundWhite">#001719</color>
     <color name="textColorSecondary">@android:color/secondary_text_dark</color>
 
     <color name="light_red">#0DFFFFFF</color>

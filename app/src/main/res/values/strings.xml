@@ -30,7 +30,7 @@
     <string name="title_global">Global</string>
     <string name="title_country">Country Stats</string>
     <string name="title_news">News</string>
-    <string name="chart_combined">Combined</string>
+    <string name="chart_combined">Trends</string>
     <string name="chart_cases">Cases</string>
     <string name="chart_deaths">Deaths</string>
     <string name="chart_recovered">Recovered</string>
@@ -76,4 +76,8 @@
     <string name="settings_feedback_description">Got any queries? We are happy to help!</string>
     <string name="settings_about_description">The Covid-19 Stats app is an Android application that aims at providing reliable statistics and news about the Covid-19 pandemic while fighting misinformation. We are grateful to the following sources: Worldometers.info and The World Health Organization"</string>
     <string name="settings_open_source_title">Open Source</string>
+    <string name="button_world">World</string>
+    <string name="button_who">W.H.O.</string>
+    <string name="title_countries">Countries</string>
+    <string name="title_news_updates">News Updates</string>
 </resources>

@@ -23,7 +23,7 @@
     <color name="windowBackground">#F3F3F3</color>
     <color name="statusBarColor">@android:color/white</color>
 
-    <color name="navigationBackground">@android:color/white</color>
+    <color name="backgroundWhite">@android:color/white</color>
 
     <color name="post_background">@android:color/white</color>
 

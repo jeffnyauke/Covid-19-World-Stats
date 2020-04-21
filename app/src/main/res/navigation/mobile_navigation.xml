@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/navigation_news"
         android:name="dev.jeffnyauke.covid19stats.ui.news.NewsFragment"
-        android:label="@string/title_news"
+        android:label="@string/title_news_updates"
         tools:layout="@layout/fragment_news">
         <action
             android:id="@+id/action_NewsFragment_to_FaqsFragment"

@@ -18,6 +18,8 @@
 
 package dev.jeffnyauke.covid19stats.repository
 
+import com.prof.rssparser.Article
+import com.prof.rssparser.Parser
 import dev.jeffnyauke.covid19stats.api.Covid19StatsApiService
 import dev.jeffnyauke.covid19stats.model.*
 import dev.jeffnyauke.covid19stats.utils.State
@@ -29,6 +31,8 @@ import retrofit2.Response
 
 @ExperimentalCoroutinesApi
 class CovidStatsRepository(private val apiService: Covid19StatsApiService) {
+
+    val parser = Parser()
 
     fun getGlobalData(): Flow<State<Global>> {
         return object : NetworkBoundRepository<Global>() {
@@ -75,6 +79,13 @@ class CovidStatsRepository(private val apiService: Covid19StatsApiService) {
         return object : NetworkBoundRepository<NewsResponse>() {
             override suspend fun fetchFromRemote(): Response<NewsResponse> =
                 apiService.getNews(url)
+        }.asFlow().flowOn(Dispatchers.IO)
+    }
+
+    fun getWorldNews(url: String): Flow<State<NewsResponse>> {
+        return object : WorldNewsBoundRepository() {
+            override suspend fun fetchFromRemote(): MutableList<Article> =
+                parser.getChannel(url).articles
         }.asFlow().flowOn(Dispatchers.IO)
     }
 

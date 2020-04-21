@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~
   ~  Copyright (c) 2020 jeffnyauke@gmail.com
   ~
@@ -16,19 +16,7 @@
   ~
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/navigation_global"
-        android:icon="@drawable/ic_global"
-        android:title="@string/title_global" />
-
-    <item
-        android:id="@+id/navigation_country"
-        android:icon="@drawable/ic_flag"
-        android:title="@string/title_countries" />
-
-    <item
-        android:id="@+id/navigation_news"
-        android:icon="@drawable/ic_news"
-        android:title="@string/title_news" />
-</menu>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/dark_yellow" android:state_checked="true" />
+    <item android:color="@color/imageBackgroundTint" android:state_checked="false" />
+</selector>

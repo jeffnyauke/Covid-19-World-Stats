@@ -39,10 +39,11 @@
     <TextView
         android:id="@+id/post_date"
         style="@style/NewsDateText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_title"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         tools:text="@tools:sample/full_names" />
 
     <ImageView

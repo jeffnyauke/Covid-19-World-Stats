@@ -23,6 +23,7 @@ import com.squareup.moshi.Moshi.Builder
 import dev.jeffnyauke.covid19stats.model.History
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.text.SimpleDateFormat
 
 
 /**
@@ -44,6 +45,14 @@ class ExampleUnitTest {
         history?.timeline?.cases?.entries?.forEach {
             println("On ${it.key} we had ${it.value} cases.")
         }
+        assertEquals(4, 2 + 2)
+    }
+
+    @Test
+    fun textTime() {
+        val date =
+            SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z").parse("Mon, 20 Apr 2020 21:11:47 GMT")
+        println(date)
         assertEquals(4, 2 + 2)
     }
 }
