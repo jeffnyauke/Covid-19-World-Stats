@@ -39,15 +39,21 @@ abstract class WorldNewsBoundRepository {
             // Fetch latest data from remote
             val apiResponse = fetchFromRemote()
 
-            // Emit
-            emit(State.success(NewsResponse(data = apiResponse.map {
-                NewsData(
-                    title = it.title,
-                    link = it.link,
-                    date = "${getPeriodWorldNews(it.pubDate!!)} | ${it.sourceName}",
-                    image = it.image
-                )
-            })))
+            if (apiResponse.isNullOrEmpty()) {
+                // Something went wrong! Emit Error state.
+                emit(State.error("Something went wrong! Can't get latest data."))
+            } else {
+                // Success
+                emit(State.success(NewsResponse(data = apiResponse.map {
+                    NewsData(
+                        title = it.title,
+                        link = it.link,
+                        date = "${getPeriodWorldNews(it.pubDate!!)} | ${it.sourceName}",
+                        image = it.image
+                    )
+                })))
+            }
+
 
         } catch (e: Exception) {
             // Exception occurred! Emit error

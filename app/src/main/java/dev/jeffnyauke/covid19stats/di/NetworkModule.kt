@@ -19,6 +19,7 @@
 package dev.jeffnyauke.covid19stats.di
 
 import android.content.Context
+import com.prof.rssparser.Parser
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dev.jeffnyauke.covid19stats.api.Covid19StatsApiService
@@ -48,8 +49,13 @@ val networkModule = module {
     }
 
     single {
-        CovidStatsRepository(get())
+        CovidStatsRepository(get(), get())
     }
+
+    single {
+        Parser(getOkHttpClient(androidContext()))
+    }
+
 }
 
 fun getOkHttpClient(context: Context): OkHttpClient {

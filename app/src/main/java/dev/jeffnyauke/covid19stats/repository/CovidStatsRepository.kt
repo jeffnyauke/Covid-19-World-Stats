@@ -30,9 +30,10 @@ import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 
 @ExperimentalCoroutinesApi
-class CovidStatsRepository(private val apiService: Covid19StatsApiService) {
-
-    val parser = Parser()
+class CovidStatsRepository(
+    private val apiService: Covid19StatsApiService,
+    private val parser: Parser
+) {
 
     fun getGlobalData(): Flow<State<Global>> {
         return object : NetworkBoundRepository<Global>() {
