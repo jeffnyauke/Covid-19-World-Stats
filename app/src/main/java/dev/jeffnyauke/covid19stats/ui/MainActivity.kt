@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_global, R.id.navigation_country, R.id.navigation_news
             )
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 

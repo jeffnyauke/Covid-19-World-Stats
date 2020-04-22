@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/chart_cases"
+            android:text="@string/chart_confirmed"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:textStyle="bold" />
 

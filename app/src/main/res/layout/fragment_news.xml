@@ -22,56 +22,65 @@
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/backgroundWhite">
+    android:background="@color/windowBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleButton"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16"
+            android:background="@color/post_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonWorld"
-                style="?attr/materialButtonOutlinedStyle"
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button_world"
-                android:textColor="@color/toggle_button_colors"
-                app:strokeColor="@color/toggle_button_colors" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen_16"
+                app:selectionRequired="true"
+                app:singleSelection="true">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonWho"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_who"
-                android:textColor="@color/toggle_button_colors"
-                app:strokeColor="@color/toggle_button_colors" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonWorld"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_world"
+                    android:textColor="@color/toggle_button_colors"
+                    app:strokeColor="@color/toggle_button_colors" />
 
-        </com.google.android.material.button.MaterialButtonToggleGroup>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonWho"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_who"
+                    android:textColor="@color/toggle_button_colors"
+                    app:strokeColor="@color/toggle_button_colors" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+        </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dimen_4"
             android:clipToPadding="false"
+            android:layout_marginTop="@dimen/dimen_1"
             android:scrollbars="vertical"
+            android:elevation="@dimen/dimen_16"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toggleButton"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout"
             tools:listitem="@layout/item_news" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

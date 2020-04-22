@@ -18,6 +18,7 @@
 
 <resources>
     <string name="app_name">COVID-19 Stats</string>
+    <string name="app_name_brief">COVID-19</string>
     <string name="confirmed">Confirmed</string>
     <string name="active">Active</string>
     <string name="recovered">Recovered</string>
@@ -31,7 +32,7 @@
     <string name="title_country">Country Stats</string>
     <string name="title_news">News</string>
     <string name="chart_combined">Trends</string>
-    <string name="chart_cases">Cases</string>
+    <string name="chart_confirmed">Confirmed</string>
     <string name="chart_deaths">Deaths</string>
     <string name="chart_recovered">Recovered</string>
     <string name="extended_fab_filter">Filter</string>

@@ -53,7 +53,7 @@ class CountryAdapter(private val onItemClickListener: OnItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(country: Country, onItemClickListener: OnItemClickListener? = null) {
             binding.textState.text = "${bindingAdapterPosition + 1}. ${country.country}"
-            binding.textLastUpdatedView.text = itemView.context.getString(
+            binding.textLastUpdatedView.text = "| " + itemView.context.getString(
                 R.string.text_last_updated,
                 getPeriod(
                     Date(country.updated)
