@@ -16,20 +16,16 @@
  *
  */
 
-package dev.jeffnyauke.covid19stats.model
+package dev.jeffnyauke.covid19stats.ui.analytics.events
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.firebase.analytics.FirebaseAnalytics.Param.ITEM_NAME
+import dev.jeffnyauke.covid19stats.ui.analytics.Event
 
-@JsonClass(generateAdapter = true)
-data class NewsData(
-    @Json(name = "title")
-    var title: String? = null,
-    @Json(name = "link")
-    var link: String? = null,
-    @Json(name = "date")
-    var date: String? = null,
-    @Json(name = "image")
-    var image: String? = null
+class SortEvent(titleName: String) : Event() {
 
-)
+    override val name: String = "sort"
+
+    override val data = mapOf(
+        ITEM_NAME to titleName
+    )
+}

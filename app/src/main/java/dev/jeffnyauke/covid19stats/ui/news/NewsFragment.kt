@@ -28,11 +28,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.MergeAdapter
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.FragmentNewsBinding
 import dev.jeffnyauke.covid19stats.model.NewsData
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.adapter.NewsAdapter
+import dev.jeffnyauke.covid19stats.ui.analytics.Tracker
+import dev.jeffnyauke.covid19stats.ui.analytics.events.NewsClickEvent
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.get
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.set
 import dev.jeffnyauke.covid19stats.utils.State
@@ -49,6 +52,8 @@ class NewsFragment : Fragment(), NewsAdapter.OnItemClickListener {
 
     private val viewModel: MainViewModel by viewModel()
     private val prefs: SharedPreferences by inject()
+    private val tracker: Tracker by inject()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     private val mNewsAdapter = NewsAdapter(onItemClickListener = this)
     private val adapter = MergeAdapter(mNewsAdapter)
@@ -89,6 +94,7 @@ class NewsFragment : Fragment(), NewsAdapter.OnItemClickListener {
             }
         }
 
+        firebaseAnalytics.setCurrentScreen(requireActivity(), "News Fragment", null)
         return binding.root
     }
 
@@ -123,6 +129,15 @@ class NewsFragment : Fragment(), NewsAdapter.OnItemClickListener {
 
     override fun onItemClicked(post: NewsData) {
         post.link?.let {
+            val variant = when {
+                prefs[getString(R.string.pref_news_type), 0] == 0 -> {
+                    NewsClickEvent.ClickVariant.WORLD
+                }
+                else -> {
+                    NewsClickEvent.ClickVariant.WHO
+                }
+            }
+            tracker.track(NewsClickEvent(post.title.toString(), variant))
             openWebPage(it)
         }
     }

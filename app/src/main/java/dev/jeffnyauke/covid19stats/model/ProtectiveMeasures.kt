@@ -19,7 +19,9 @@
 package dev.jeffnyauke.covid19stats.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class ProtectiveMeasures(
     @Json(name = "source")
     var source: String? = null,

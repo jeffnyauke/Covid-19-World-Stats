@@ -29,6 +29,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.MergeAdapter
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.jeffnyauke.covid19stats.databinding.FragmentCountryDetailsBinding
 import dev.jeffnyauke.covid19stats.ui.MainActivity
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
@@ -38,6 +39,7 @@ import dev.jeffnyauke.covid19stats.ui.adapter.CountryTotalAdapter
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -49,6 +51,7 @@ class CountryDetailsFragment : Fragment() {
     private lateinit var binding: FragmentCountryDetailsBinding
 
     private val viewModel: MainViewModel by viewModel()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     private val mTotalAdapter = CountryTotalAdapter()
     private val mChartAdapter = CountryChartAdapter()
@@ -75,6 +78,8 @@ class CountryDetailsFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadData()
         }
+
+        firebaseAnalytics.setCurrentScreen(requireActivity(), "Country Details Fragment", null)
         return binding.root
     }
 

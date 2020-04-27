@@ -205,9 +205,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dimen_4"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_unit_banner_total_country"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/admob_unit_banner_total"
         app:layout_constraintTop_toBottomOf="@+id/textLastUpdatedView"></com.google.android.gms.ads.AdView>
 </androidx.constraintlayout.widget.ConstraintLayout>

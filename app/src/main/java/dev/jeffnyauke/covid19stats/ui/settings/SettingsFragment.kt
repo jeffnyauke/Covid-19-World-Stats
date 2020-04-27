@@ -32,13 +32,19 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.jeffnyauke.covid19stats.R
+import dev.jeffnyauke.covid19stats.ui.analytics.Tracker
+import dev.jeffnyauke.covid19stats.ui.analytics.events.SettingsClickEvent
 import dev.jeffnyauke.covid19stats.utils.addOnPropertyChanged
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private val viewModel: SettingsViewModel by viewModel()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
+    private val tracker: Tracker by inject()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -57,9 +63,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
             setDefaultNightMode(it.get())
         }
 
+        val intervals = findPreference<ListPreference>(getString(R.string.pref_key_intervals))!!
+        intervals.setOnPreferenceChangeListener { _, newValue ->
+            viewModel.changeTheme(newValue as String)
+            true
+        }
+
         val theme = findPreference<ListPreference>(getString(R.string.pref_key_theme_picker))!!
         theme.setOnPreferenceChangeListener { _, newValue ->
-            viewModel.changeTheme(newValue as String)
+            viewModel.changeNotificationInterval(newValue as String)
             true
         }
 
@@ -70,8 +82,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
+        findPreference<SwitchPreference>(getString(R.string.pref_key_notifications))!!.apply {
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+                viewModel.enableNotifications(newValue as Boolean)
+                true
+            }
+        }
+
         findPreference<Preference>(getString(R.string.pref_key_version))!!.apply {
             summary = context.packageManager.getPackageInfo(context.packageName, 0).versionName
+            tracker.track(SettingsClickEvent("Version"))
         }
 
         findPreference<SwitchPreference>(getString(R.string.pref_key_crash_reports))!!.apply {
@@ -84,9 +104,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference<Preference>(getString(R.string.pref_key_send_feedback))!!.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 sendFeedback(requireActivity())
+                tracker.track(SettingsClickEvent("Send feedback"))
                 true
             }
         }
+
+        firebaseAnalytics.setCurrentScreen(requireActivity(), "Settings Fragment", null)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

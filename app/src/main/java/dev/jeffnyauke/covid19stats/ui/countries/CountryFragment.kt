@@ -30,12 +30,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.MergeAdapter
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.FragmentCountryBinding
 import dev.jeffnyauke.covid19stats.model.Country
 import dev.jeffnyauke.covid19stats.model.enums.Order
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.adapter.CountryAdapter
+import dev.jeffnyauke.covid19stats.ui.analytics.Tracker
+import dev.jeffnyauke.covid19stats.ui.analytics.events.CountryClickEvent
+import dev.jeffnyauke.covid19stats.ui.analytics.events.SearchClickEvent
+import dev.jeffnyauke.covid19stats.ui.analytics.events.SortEvent
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.get
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.set
 import dev.jeffnyauke.covid19stats.utils.State
@@ -52,6 +57,8 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
 
     private val viewModel: MainViewModel by viewModel()
     private val prefs: SharedPreferences by inject()
+    private val tracker: Tracker by inject()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     private val mCountryAdapter = CountryAdapter(onItemClickListener = this)
     private val adapter = MergeAdapter(mCountryAdapter)
@@ -74,6 +81,8 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadData()
         }
+
+        firebaseAnalytics.setCurrentScreen(requireActivity(), "Country Fragment", null)
 
         return binding.root
     }
@@ -115,6 +124,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
     }
 
     override fun onItemClicked(country: Country) {
+        tracker.track(CountryClickEvent(country.country.toString()))
         val action = CountryFragmentDirections
             .actionCountryFragmentToCountryDetailsFragment(country)
         NavHostFragment.findNavController(this@CountryFragment)
@@ -156,6 +166,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_search -> {
+                tracker.track(SearchClickEvent("Country"))
                 true
             }
             R.id.action_sort -> {
@@ -192,6 +203,7 @@ class CountryFragment : Fragment(), CountryAdapter.OnItemClickListener {
         ) { dialogInterface, i ->
             prefs[getString(R.string.pref_sort)] = Order.valueOf(listItemsNames[i]).tag
             loadData()
+            tracker.track(SortEvent(prefs[getString(R.string.pref_sort), Order.CASES.tag].toString()))
             dialogInterface.dismiss()
         }
 

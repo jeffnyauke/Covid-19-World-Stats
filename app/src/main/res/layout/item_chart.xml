@@ -17,6 +17,7 @@
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -56,6 +57,15 @@
             android:layout_margin="@dimen/dimen_8"
             android:padding="8dp" />
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dimen_8"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/admob_unit_banner_chart" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,6 +80,15 @@
             android:layout_height="@dimen/chart_height"
             android:layout_margin="@dimen/dimen_8"
             android:padding="8dp" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dimen_8"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/admob_unit_banner_chart" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,6 +106,15 @@
             android:layout_margin="@dimen/dimen_8"
             android:padding="8dp" />
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dimen_8"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/admob_unit_banner_chart" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,5 +130,15 @@
             android:layout_height="@dimen/chart_height"
             android:layout_margin="@dimen/dimen_8"
             android:padding="8dp" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_4"
+            android:layout_marginBottom="@dimen/dimen_8"
+            ads:adSize="MEDIUM_RECTANGLE"
+            ads:adUnitId="@string/admob_unit_banner_chart" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

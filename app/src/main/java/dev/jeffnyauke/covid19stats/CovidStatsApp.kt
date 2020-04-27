@@ -80,7 +80,6 @@ class CovidStatsApp : Application() {
 
             val interval = prefs[keyInterval, getString(R.string.interval_value_half_hour)]
             notificationWorkerManager.initialize(interval!!.toLong())
-            notificationWorkerManager.start()
         }
 
         if (!prefs.contains(keyThemePicker)) {

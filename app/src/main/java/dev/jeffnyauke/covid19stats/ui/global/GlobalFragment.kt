@@ -26,6 +26,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.MergeAdapter
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.FragmentGlobalBinding
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
@@ -33,6 +34,7 @@ import dev.jeffnyauke.covid19stats.ui.adapter.ChartAdapter
 import dev.jeffnyauke.covid19stats.ui.adapter.TotalAdapter
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -42,6 +44,7 @@ class GlobalFragment : Fragment() {
     private lateinit var binding: FragmentGlobalBinding
 
     private val viewModel: MainViewModel by viewModel()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     private val mTotalAdapter = TotalAdapter()
     private val mChartAdapter = ChartAdapter()
@@ -66,6 +69,8 @@ class GlobalFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadData()
         }
+
+        firebaseAnalytics.setCurrentScreen(requireActivity(), "Global Fragment", null)
         return binding.root
     }
 
@@ -98,6 +103,7 @@ class GlobalFragment : Fragment() {
                         delay(500)
                         mChartAdapter.submitList(listOf(item))
                         binding.swipeRefreshLayout.isRefreshing = false
+                        binding.recycler.scrollToPosition(0)
                     }
                 }
             }

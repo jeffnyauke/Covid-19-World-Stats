@@ -35,9 +35,9 @@ class NotificationWorkerManager(private val workManager: WorkManager) {
     fun initialize(interval: Long) {
         notificationWorkRequest =
             PeriodicWorkRequestBuilder<NotificationWorker>(interval, TimeUnit.MINUTES)
-                .setInitialDelay(interval, TimeUnit.DAYS)
                 .setConstraints(constraints)
                 .build()
+        start()
     }
 
     fun start() {

@@ -21,6 +21,7 @@ package dev.jeffnyauke.covid19stats.ui.analytics
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.analytics.FirebaseAnalytics
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.utils.PreferenceHelper.set
@@ -54,5 +55,6 @@ internal class TrackerImpl(
 
     override fun enableTracking(enabled: Boolean) {
         firebaseAnalytics.setAnalyticsCollectionEnabled(enabled)
+        Log.e("TIME INFO", "trak")
     }
 }

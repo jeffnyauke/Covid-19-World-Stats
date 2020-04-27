@@ -19,7 +19,9 @@
 package dev.jeffnyauke.covid19stats.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Cases(
     @Json(name = "updated")
     var updated: Long = 0L,

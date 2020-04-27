@@ -23,8 +23,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
 import dev.jeffnyauke.covid19stats.R
-import dev.jeffnyauke.covid19stats.databinding.ItemTotalBinding
+import dev.jeffnyauke.covid19stats.databinding.ItemTotalCountryBinding
 import dev.jeffnyauke.covid19stats.model.Country
 import dev.jeffnyauke.covid19stats.utils.getFormattedNumber
 import dev.jeffnyauke.covid19stats.utils.getPeriod
@@ -34,7 +35,7 @@ class CountryTotalAdapter :
     ListAdapter<Country, CountryTotalAdapter.TotalViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TotalViewHolder(
-        ItemTotalBinding.inflate(
+        ItemTotalCountryBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -45,7 +46,7 @@ class CountryTotalAdapter :
         holder.bind(getItem(position))
 
 
-    class TotalViewHolder(private val binding: ItemTotalBinding) :
+    class TotalViewHolder(private val binding: ItemTotalCountryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(country: Country) {
             binding.textLastUpdatedView.text = itemView.context.getString(
@@ -69,6 +70,9 @@ class CountryTotalAdapter :
                 "${getFormattedNumber(country.todayDeaths.toDouble() / (country.deaths.toDouble() - country.todayDeaths.toDouble()) * 100)}% ${getFormattedNumber(
                     country.todayDeaths
                 )}"
+
+            val adRequest = AdRequest.Builder().build()
+            binding.adView.loadAd(adRequest)
         }
     }
 

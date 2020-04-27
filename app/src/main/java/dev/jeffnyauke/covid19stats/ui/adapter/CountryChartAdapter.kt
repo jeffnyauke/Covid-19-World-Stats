@@ -29,6 +29,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.gms.ads.AdRequest
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.databinding.ItemCountryChartBinding
 import dev.jeffnyauke.covid19stats.model.History
@@ -106,6 +107,18 @@ class CountryChartAdapter :
                 R.color.dark_green,
                 R.color.light_green
             )
+
+            val adRequestOne = AdRequest.Builder().build()
+            binding.adViewOne.loadAd(adRequestOne)
+
+            val adRequestTwo = AdRequest.Builder().build()
+            binding.adViewTwo.loadAd(adRequestTwo)
+
+            val adRequestThree = AdRequest.Builder().build()
+            binding.adViewThree.loadAd(adRequestThree)
+
+            val adRequestFour = AdRequest.Builder().build()
+            binding.adViewFour.loadAd(adRequestFour)
         }
 
         private fun setupCombinedChart(

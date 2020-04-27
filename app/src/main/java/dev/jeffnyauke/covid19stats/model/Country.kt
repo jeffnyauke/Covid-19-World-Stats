@@ -20,9 +20,11 @@ package dev.jeffnyauke.covid19stats.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@JsonClass(generateAdapter = true)
 data class Country(
     @Json(name = "updated")
     var updated: Long = 0L,

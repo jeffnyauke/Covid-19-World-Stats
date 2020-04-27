@@ -25,6 +25,8 @@ import androidx.lifecycle.ViewModel
 import dev.jeffnyauke.covid19stats.R
 import dev.jeffnyauke.covid19stats.ui.analytics.CrashReport
 import dev.jeffnyauke.covid19stats.ui.analytics.Tracker
+import dev.jeffnyauke.covid19stats.ui.analytics.events.SettingsListEvent
+import dev.jeffnyauke.covid19stats.ui.analytics.events.SettingsSwitchEvent
 
 class SettingsViewModel(
     private val context: Context,
@@ -36,10 +38,31 @@ class SettingsViewModel(
 
     fun enableCrashReport(enabled: Boolean) {
         crashReport.enableCrashReporting(enabled)
+        val variant = if (enabled) {
+            SettingsSwitchEvent.ChoiceVariant.ON
+        } else {
+            SettingsSwitchEvent.ChoiceVariant.OFF
+        }
+        tracker.track(SettingsSwitchEvent("Crash Reporting", variant))
     }
 
     fun enableTracking(enabled: Boolean) {
         tracker.enableTracking(enabled)
+        val variant = if (enabled) {
+            SettingsSwitchEvent.ChoiceVariant.ON
+        } else {
+            SettingsSwitchEvent.ChoiceVariant.OFF
+        }
+        tracker.track(SettingsSwitchEvent("Tracking", variant))
+    }
+
+    fun enableNotifications(enabled: Boolean) {
+        val variant = if (enabled) {
+            SettingsSwitchEvent.ChoiceVariant.ON
+        } else {
+            SettingsSwitchEvent.ChoiceVariant.OFF
+        }
+        tracker.track(SettingsSwitchEvent("Notifications", variant))
     }
 
     fun changeTheme(theme: String) {
@@ -50,5 +73,15 @@ class SettingsViewModel(
             else -> throw IllegalArgumentException("Mode with value: $theme is not supported")
         }
         mode.set(newMode)
+        tracker.track(SettingsListEvent(theme, SettingsListEvent.ListVariant.THEME))
+    }
+
+    fun changeNotificationInterval(interval: String) {
+        tracker.track(
+            SettingsListEvent(
+                "$interval minutes",
+                SettingsListEvent.ListVariant.FREQUENCY
+            )
+        )
     }
 }

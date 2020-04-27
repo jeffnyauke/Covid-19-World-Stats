@@ -28,12 +28,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.MergeAdapter
+import com.google.firebase.analytics.FirebaseAnalytics
 import dev.jeffnyauke.covid19stats.databinding.FragmentFaqsBinding
 import dev.jeffnyauke.covid19stats.ui.MainViewModel
 import dev.jeffnyauke.covid19stats.ui.adapter.FaqsAdapter
 import dev.jeffnyauke.covid19stats.utils.State
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -43,6 +45,7 @@ class FaqsFragment : Fragment() {
     private lateinit var binding: FragmentFaqsBinding
 
     private val viewModel: MainViewModel by viewModel()
+    private val firebaseAnalytics: FirebaseAnalytics by inject()
 
     private val mFaqsAdapter = FaqsAdapter()
     private val adapter = MergeAdapter(mFaqsAdapter)
@@ -66,6 +69,8 @@ class FaqsFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadData()
         }
+
+        firebaseAnalytics.setCurrentScreen(requireActivity(), "FAQs Fragment", null)
         return binding.root
     }
 

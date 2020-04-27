@@ -18,7 +18,7 @@
 
 <resources>
     <string name="app_name">COVID-19 Stats</string>
-    <string name="app_name_brief">COVID-19</string>
+    <string name="app_name_brief">COVID-19 Stats</string>
     <string name="confirmed">Confirmed</string>
     <string name="active">Active</string>
     <string name="recovered">Recovered</string>

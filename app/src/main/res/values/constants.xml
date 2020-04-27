@@ -33,6 +33,10 @@
     <string name="pref_key_intervals" translatable="false">pref_key_intervals</string>
     <string name="pref_key_send_feedback" translatable="false">pref_key_send_feedback</string>
     <string name="pref_key_version" translatable="false">pref_key_version</string>
+    <string name="pref_key_developer" translatable="false">pref_key_developer</string>
+    <string name="pref_key_privacy_policy" translatable="false">pref_key_Privacy_policy</string>
+    <string name="pref_key_terms" translatable="false">pref_key_terms</string>
+    <string name="pref_key_open_source" translatable="false">pref_key_open_source</string>
 
     <string name="pref_sort" translatable="false">pref_sort</string>
     <string name="pref_news_type" translatable="false">pref_news_type</string>

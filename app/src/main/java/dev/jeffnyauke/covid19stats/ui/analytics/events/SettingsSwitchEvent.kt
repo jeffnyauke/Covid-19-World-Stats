@@ -23,7 +23,7 @@ import com.google.firebase.analytics.FirebaseAnalytics.Param.ITEM_NAME
 import com.google.firebase.analytics.FirebaseAnalytics.Param.ITEM_VARIANT
 import dev.jeffnyauke.covid19stats.ui.analytics.Event
 
-class ClickEvent(titleName: String, clickType: ClickVariant) : Event() {
+class SettingsSwitchEvent(titleName: String, clickType: ChoiceVariant) : Event() {
 
     override val name: String = FirebaseAnalytics.Event.SELECT_ITEM
 
@@ -32,8 +32,8 @@ class ClickEvent(titleName: String, clickType: ClickVariant) : Event() {
         ITEM_VARIANT to clickType.variantName
     )
 
-    enum class ClickVariant(val variantName: String) {
-        NEWS("News"),
-        COUNRTY("Country")
+    enum class ChoiceVariant(val variantName: String) {
+        ON("On"),
+        OFF("Off")
     }
 }

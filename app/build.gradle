@@ -23,6 +23,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.google.firebase.crashlytics'
 
+def keystorePropertiesFile = rootProject.file("local.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -31,8 +35,8 @@ android {
         applicationId "dev.jeffnyauke.covid19stats"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 2
-        versionName "2.0.1"
+        versionCode 3
+        versionName "2.0.20.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,13 +49,52 @@ android {
         enabled = true
     }
 
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['signing.key.alias']
+            keyPassword keystoreProperties['signing.key.password']
+            storeFile file(keystoreProperties['signing.store.file'])
+            storePassword keystoreProperties['signing.store.password']
+        }
+    }
+
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+
+            firebaseCrashlytics {
+                // If you don't need crash reporting for your debug build,
+                // you can speed up your build by disabling mapping file uploading.
+                mappingFileUploadEnabled false
+            }
+
+            resValue 'string', 'admob_app_id', keystoreProperties['admob.app.id']
+            resValue 'string', 'admob_unit_banner_total', keystoreProperties['admob.unit.test']
+            resValue 'string', 'admob_unit_banner_total_country', keystoreProperties['admob.unit.test']
+            resValue 'string', 'admob_unit_banner_chart', keystoreProperties['admob.unit.test']
+            resValue 'string', 'admob_unit_banner_chart_country', keystoreProperties['admob.unit.test']
+            resValue 'string', 'admob_unit_interstitial', keystoreProperties['admob.unit.test']
+            resValue 'string', 'admob_unit_native_country', keystoreProperties['admob.unit.test']
+            resValue 'string', 'admob_unit_native_news', keystoreProperties['admob.unit.test']
+        }
+
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            resValue 'string', 'admob_app_id', keystoreProperties['admob.app.id']
+            resValue 'string', 'admob_unit_banner_total', keystoreProperties['admob.unit.banner_total']
+            resValue 'string', 'admob_unit_banner_total_country', keystoreProperties['admob.unit.banner_total_country']
+            resValue 'string', 'admob_unit_banner_chart', keystoreProperties['admob.unit.banner_chart']
+            resValue 'string', 'admob_unit_banner_chart_country', keystoreProperties['admob.unit.banner_chart_country']
+            resValue 'string', 'admob_unit_interstitial', keystoreProperties['admob.unit.interstitial']
+            resValue 'string', 'admob_unit_native_country', keystoreProperties['admob.unit.native_country']
+            resValue 'string', 'admob_unit_native_news', keystoreProperties['admob.unit.native_news']
         }
     }
 
@@ -59,9 +102,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
-
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -149,10 +189,10 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:17.3.0'
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta04'
-    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:19.0.5'
+    //implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:19.0.5'
     implementation 'com.google.android.gms:play-services-ads:19.1.0'
 
-    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    //implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     implementation 'com.prof.rssparser:rssparser:2.1.2'
 
