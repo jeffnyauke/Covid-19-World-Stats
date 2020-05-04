@@ -125,7 +125,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
             entriesDeaths: ArrayList<Entry>,
             entriesRecoveries: ArrayList<Entry>
         ) {
-            val mFormatPretty = SimpleDateFormat("MMM yy", Locale.ENGLISH)
+            val mFormatPretty = SimpleDateFormat("dd MMM", Locale.ENGLISH)
 
             //Part1
             val data1 = LineDataSet(entriesCases, "Covid-19 Cases")
@@ -153,7 +153,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
 
             //Part3
             chart.xAxis.labelRotationAngle = 0f
-            chart.xAxis.granularity = 1000f
+            chart.xAxis.granularity = 20000f
             chart.xAxis.setDrawGridLines(false)
             chart.xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
@@ -171,7 +171,8 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
 
             //Part7
             chart.axisRight.isEnabled = false
-            chart.xAxis.axisMaximum = entriesCases.last().x + 720f
+            chart.xAxis.axisMaximum = entriesCases.last().x + 2000f
+            chart.xAxis.axisMinimum = entriesCases.map { it.x }.min() ?: 0f
             chart.description.isEnabled = false
             chart.xAxis.textColor = chart.context.resources.getColor(R.color.textColor)
             chart.legend.textColor = chart.context.resources.getColor(R.color.textColorSecondary)
@@ -200,7 +201,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
             color: Int,
             fillColor: Int
         ) {
-            val mFormatPretty = SimpleDateFormat("MMM yy", Locale.ENGLISH)
+            val mFormatPretty = SimpleDateFormat("dd MMM", Locale.ENGLISH)
 
             //Part1
             val data = LineDataSet(entries, label)
@@ -216,7 +217,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
 
             //Part3
             chart.xAxis.labelRotationAngle = 0f
-            chart.xAxis.granularity = 2000f
+            chart.xAxis.granularity = 20000f
             chart.xAxis.setDrawGridLines(false)
             chart.xAxis.valueFormatter = object : ValueFormatter() {
                 override fun getFormattedValue(value: Float): String {
@@ -235,6 +236,7 @@ class ChartAdapter : ListAdapter<Timeline, ChartAdapter.ChartViewHolder>(DIFF_CA
             //Part7
             chart.axisRight.isEnabled = false
             chart.xAxis.axisMaximum = entries.last().x + 2000f
+            chart.xAxis.axisMinimum = entries.map { it.x }.min() ?: 0f
             chart.description.isEnabled = false
             chart.xAxis.textColor = chart.context.resources.getColor(R.color.textColor)
             chart.legend.textColor = chart.context.resources.getColor(R.color.textColorSecondary)

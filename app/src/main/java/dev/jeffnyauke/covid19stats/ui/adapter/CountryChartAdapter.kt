@@ -127,7 +127,7 @@ class CountryChartAdapter :
             entriesDeaths: ArrayList<Entry>,
             entriesRecoveries: ArrayList<Entry>
         ) {
-            val mFormatPretty = SimpleDateFormat("MMM yy", Locale.ENGLISH)
+            val mFormatPretty = SimpleDateFormat("dd MMM", Locale.ENGLISH)
 
             //Part1
             val data1 = LineDataSet(entriesCases, "Covid-19 Cases")
@@ -202,7 +202,7 @@ class CountryChartAdapter :
             color: Int,
             fillColor: Int
         ) {
-            val mFormatPretty = SimpleDateFormat("MMM yy", Locale.ENGLISH)
+            val mFormatPretty = SimpleDateFormat("dd MMM", Locale.ENGLISH)
 
             //Part1
             val data = LineDataSet(entries, label)
