@@ -20,7 +20,6 @@
 The sample Android application 📱 is built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤ .
 
 ***You can Install and test latest Covid-19 World Stats app from below 👇***
-
 [Covid-19 World Stats App](https://appdistribution.firebase.dev/i/fLb85aoy)
 
 ## About
