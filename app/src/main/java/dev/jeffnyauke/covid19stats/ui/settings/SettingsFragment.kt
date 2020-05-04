@@ -65,13 +65,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val intervals = findPreference<ListPreference>(getString(R.string.pref_key_intervals))!!
         intervals.setOnPreferenceChangeListener { _, newValue ->
-            viewModel.changeTheme(newValue as String)
+            viewModel.changeNotificationInterval(newValue as String)
             true
         }
 
         val theme = findPreference<ListPreference>(getString(R.string.pref_key_theme_picker))!!
         theme.setOnPreferenceChangeListener { _, newValue ->
-            viewModel.changeNotificationInterval(newValue as String)
+            viewModel.changeTheme(newValue as String)
             true
         }
 
