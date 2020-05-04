@@ -4,10 +4,9 @@
   <img width="285" src="art/overview-light.png?raw=true">
   <img width="285" src="art/countries-light.png?raw=true">
   <img width="285" src="art/country-light.png?raw=true">
-  <img width="285" src="art/country-scroll-light.png?raw=true">
 </p>
 
-# Covid-19-World-Stats
+# Covid-19 World Stats
 
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Github Followers](https://img.shields.io/github/followers/jeffnyauke?label=Follow&style=social)
@@ -16,20 +15,13 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/jeffnyauke/Covid19-Notifier-IN?style=social)
 ![Twitter Follow](https://img.shields.io/twitter/follow/pesapocket?label=Follow&style=social)
 
-**Covid-19 World Stats** is an Android App that displays the latest global stats about the COVID-19 spread. It caches data locally. The sample Android application 📱 is built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤ .
+**Covid-19 World Stats** is an Android App that displays the latest global stats about the COVID-19 spread.
+
+The sample Android application 📱 is built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤ .
 
 ***You can Install and test latest Covid-19 World Stats app from below 👇***
 
 [Covid-19 World Stats App](https://appdistribution.firebase.dev/i/fLb85aoy)
-
-<p align="center">
-  <img width="285" src="art/overview-dark.png?raw=true">
-  <img width="285" src="art/countries-dark.png?raw=true">
-  <img width="285" src="art/country-dark.png?raw=true">
-  <img width="285" src="art/country-scroll-light.png?raw=true">
-  <img width="285" src="art/faqs-dark.png?raw=true">
-  <img width="285" src="art/settings-dark.png?raw=true">
-</p>
 
 ## About
 - It loads **Total COVID-19 cases worldwide** from [API](https://github.com/NovelCOVID/API).
@@ -81,15 +73,10 @@ This app would not exist without it's data sources.
  - [Tne Novel Covid API](https://github.com/NovelCOVID/API) by [Novel COVID](https://github.com/NovelCOVID)
  - [COVID19 News API](https://github.com/einnar82/covid19-news-api) by [Rannie Ollit](https://github.com/einnar82)
 
-## Credits
+### Credits
 Thanks to [Covid19-Notifier-IN](https://github.com/PatilShreyas/Covid19-Notifier-IN) by [Shreyas Patil](https://github.com/PatilShreyas) for inspiration.
 
-## Contact
-If you need any help, you can connect with me.
-
-Visit:- [Jeffrey Nyauke](piestackio@gmail.com)
-
-## Support
+### Support
 You can support via [paypal](https://www.paypal.com/jeffnyauke)
 
 ## Authors
