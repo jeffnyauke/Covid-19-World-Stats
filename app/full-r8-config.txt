@@ -1,0 +1,1174 @@
+# This is a configuration file for ProGuard.
+# http://proguard.sourceforge.net/index.html#manual/usage.html
+#
+# Starting with version 2.2 of the Android plugin for Gradle, this file is distributed together with
+# the plugin and unpacked at build-time. The files in $ANDROID_HOME are no longer maintained and
+# will be ignored by new version of the Android plugin for Gradle.
+
+# Optimizations: If you don't want to optimize, use the proguard-android.txt configuration file
+# instead of this one, which turns off the optimization flags.
+# Adding optimization introduces certain risks, since for example not all optimizations performed by
+# ProGuard works on all versions of Dalvik.  The following flags turn off various optimizations
+# known to have issues, but the list may not be complete or up to date. (The "arithmetic"
+# optimization can be used if you are only targeting Android 2.0 or later.)  Make sure you test
+# thoroughly if you go this route.
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+-optimizationpasses 5
+-allowaccessmodification
+
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-verbose
+
+# Preserve some attributes that may be required for reflection.
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
+
+-keep public class com.google.vending.licensing.ILicensingService
+-keep public class com.android.vending.licensing.ILicensingService
+-keep public class com.google.android.vending.licensing.ILicensingService
+-dontnote com.android.vending.licensing.ILicensingService
+-dontnote com.google.vending.licensing.ILicensingService
+-dontnote com.google.android.vending.licensing.ILicensingService
+
+# For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# Keep setters in Views so that animations can still work.
+-keepclassmembers public class * extends android.view.View {
+    void set*(***);
+    *** get*();
+}
+
+# We want to keep methods in Activity that could be used in the XML attribute onClick.
+-keepclassmembers class * extends android.app.Activity {
+    public void *(android.view.View);
+}
+
+# For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keepclassmembers class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# Preserve annotated Javascript interface methods.
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+
+# The support libraries contains references to newer platform versions.
+# Don't warn about those in case this app is linking against an older
+# platform version. We know about them, and they are safe.
+-dontnote android.support.**
+-dontnote androidx.**
+-dontwarn android.support.**
+-dontwarn androidx.**
+
+# This class is deprecated, but remains for backward compatibility.
+-dontwarn android.util.FloatMath
+
+# Understand the @Keep support annotation.
+-keep class android.support.annotation.Keep
+-keep class androidx.annotation.Keep
+
+-keep @android.support.annotation.Keep class * {*;}
+-keep @androidx.annotation.Keep class * {*;}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep <init>(...);
+}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <init>(...);
+}
+
+# These classes are duplicated between android.jar and org.apache.http.legacy.jar.
+-dontnote org.apache.http.**
+-dontnote android.net.http.**
+
+# These classes are duplicated between android.jar and core-lambda-stubs.jar.
+-dontnote java.lang.invoke.**
+
+# Add project specific ProGuard rules here.
+# You can control the set of applied configuration files using the
+# proguardFiles setting in build.gradle.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file name.
+#-renamesourcefileattribute SourceFile
+
+# This rule will properly ProGuard all the model classes in
+# the package com.yourcompany.models. Modify to fit the structure
+# of your app.
+-keep class dev.jeffnyauke.covid19stats.model.** {
+  *;
+}
+
+# JSR 305 annotations are for embedding nullability information.
+-dontwarn javax.annotation.**
+
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+
+-keep @com.squareup.moshi.JsonQualifier interface *
+
+# Enum field names are used by the integrated EnumJsonAdapter.
+# values() is synthesized by the Kotlin compiler and is used by EnumJsonAdapter indirectly
+# Annotate enums with @JsonClass(generateAdapter = false) to use them with Moshi.
+-keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
+    <fields>;
+#    **[] values();
+}
+
+-keep class kotlin.reflect.jvm.internal.impl.builtins.BuiltInsLoaderImpl
+
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+
+# OkHttp
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+
+-dontwarn com.squareup.okhttp.**
+
+# Retrofit 2.X
+## https://square.github.io/retrofit/ ##
+
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+}
+
+-keepnames class android.arch.lifecycle.ViewModel -keepclassmembers public class * extends android.arch.lifecycle.ViewModel { public <init>(...); }
+-keepclassmembers class com.lebao.app.domain.** { public <init>(...); }
+-keepclassmembers class * { public <init>(...); }
+
+-printconfiguration full-r8-config.txt
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:36
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:231
+-keep class androidx.lifecycle.ProcessLifecycleOwnerInitializer { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:237
+-keep class androidx.room.MultiInstanceInvalidationService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:142
+-keep class androidx.work.impl.WorkManagerInitializer { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:171
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:181
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:201
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:191
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:221
+-keep class androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:210
+-keep class androidx.work.impl.background.systemalarm.RescheduleReceiver { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:149
+-keep class androidx.work.impl.background.systemalarm.SystemAlarmService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:154
+-keep class androidx.work.impl.background.systemjob.SystemJobService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:160
+-keep class androidx.work.impl.foreground.SystemForegroundService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:166
+-keep class androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:62
+-keep class coil.util.CoilContentProvider { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:240
+-keep class com.google.android.datatransport.runtime.backends.TransportBackendDiscovery { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:253
+-keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:247
+-keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:126
+-keep class com.google.android.gms.ads.AdActivity { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:132
+-keep class com.google.android.gms.ads.MobileAdsInitProvider { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:122
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:87
+-keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:101
+-keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:82
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:97
+-keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:67
+-keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:107
+-keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:116
+-keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:36
+-keep class dev.jeffnyauke.covid19stats.CovidStatsApp { <init>(); }
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:50
+-keep class dev.jeffnyauke.covid19stats.ui.MainActivity { <init>(); }
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_button_bar_material.xml:43
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_material.xml:52
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_title_material.xml:57
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_alert_dialog.xml:51
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_alert_dialog_actions.xml:45
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_alert_dialog_title.xml:41
+-keep class android.widget.Space { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_select_dialog_material.xml:23
+-keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_action_menu_item_layout.xml:17
+-keep class androidx.appcompat.view.menu.ActionMenuItemView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_expanded_menu_layout.xml:17
+-keep class androidx.appcompat.view.menu.ExpandedMenuView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_cascading_menu_item_layout.xml:20
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_list_menu_item_layout.xml:17
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_popup_menu_item_layout.xml:17
+-keep class androidx.appcompat.view.menu.ListMenuItemView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_toolbar.xml:27
+-keep class androidx.appcompat.widget.ActionBarContainer { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_action_mode_bar.xml:19
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_toolbar.xml:43
+-keep class androidx.appcompat.widget.ActionBarContextView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_toolbar.xml:17
+-keep class androidx.appcompat.widget.ActionBarOverlayLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_action_menu_layout.xml:17
+-keep class androidx.appcompat.widget.ActionMenuView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_activity_chooser_view.xml:19
+-keep class androidx.appcompat.widget.ActivityChooserView$InnerLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_material.xml:18
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_alert_dialog.xml:17
+-keep class androidx.appcompat.widget.AlertDialogLayout { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_faq.xml:59
+-keep class androidx.appcompat.widget.AppCompatImageView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_button_bar_material.xml:26
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_alert_dialog_actions.xml:26
+-keep class androidx.appcompat.widget.ButtonBarLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_content_include.xml:19
+-keep class androidx.appcompat.widget.ContentFrameLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_title_material.xml:45
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_alert_dialog_title.xml:36
+-keep class androidx.appcompat.widget.DialogTitle { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_simple_overlay_action_mode.xml:23
+-keep class androidx.appcompat.widget.FitWindowsFrameLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_dialog_title_material.xml:22
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_simple.xml:17
+-keep class androidx.appcompat.widget.FitWindowsLinearLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_search_view.xml:75
+-keep class androidx.appcompat.widget.SearchView$SearchAutoComplete { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\875ceac022e15908538ecbcc808a290d\preference-1.1.1\res\layout\preference_widget_switch_compat.xml:20
+-keep class androidx.appcompat.widget.SwitchCompat { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_toolbar.xml:36
+-keep class androidx.appcompat.widget.Toolbar { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_simple.xml:25
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_screen_simple_overlay_action_mode.xml:32
+-keep class androidx.appcompat.widget.ViewStubCompat { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\fa334ca5637fa5fe6cd394684b3a7ea1\browser-1.0.0\res\layout\browser_actions_context_menu_page.xml:5
+-keep class androidx.browser.browseractions.BrowserActionsFallbackMenuView { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\activity_main.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_country.xml:31
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_country_details.xml:26
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_faqs.xml:27
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_global.xml:26
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_news.xml:27
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_chart.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_country.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_country_chart.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_country_header.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_news.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_total.xml:21
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_total_country.xml:21
+-keep class androidx.constraintlayout.widget.ConstraintLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_bottom_sheet_dialog.xml:26
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_country.xml:27
+-keep class androidx.coordinatorlayout.widget.CoordinatorLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_material.xml:41
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_alert_dialog.xml:40
+-keep class androidx.core.widget.NestedScrollView { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\activity_main.xml:39
+-keep class androidx.navigation.fragment.NavHostFragment { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\xml\preferences.xml:30
+-keep class androidx.preference.ListPreference { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\xml\preferences.xml:21
+-keep class androidx.preference.PreferenceCategory { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\xml\preferences.xml:19
+-keep class androidx.preference.PreferenceScreen { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\xml\preferences.xml:23
+-keep class androidx.preference.SwitchPreference { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\875ceac022e15908538ecbcc808a290d\preference-1.1.1\res\layout\preference_widget_seekbar.xml:70
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\875ceac022e15908538ecbcc808a290d\preference-1.1.1\res\layout\preference_widget_seekbar_material.xml:77
+-keep class androidx.preference.UnPressableLinearLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\875ceac022e15908538ecbcc808a290d\preference-1.1.1\res\layout\image_frame.xml:33
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\875ceac022e15908538ecbcc808a290d\preference-1.1.1\res\layout\preference.xml:32
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\875ceac022e15908538ecbcc808a290d\preference-1.1.1\res\layout\preference_dropdown.xml:39
+-keep class androidx.preference.internal.PreferenceImageView { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_country.xml:37
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_country_details.xml:30
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_faqs.xml:32
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_global.xml:32
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_news.xml:71
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_calendar_horizontal.xml:29
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_calendar_months.xml:18
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\875ceac022e15908538ecbcc808a290d\preference-1.1.1\res\layout\preference_recyclerview.xml:18
+-keep class androidx.recyclerview.widget.RecyclerView { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_country.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_country_details.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_faqs.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_global.xml:19
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_news.xml:19
+-keep class androidx.swiperefreshlayout.widget.SwipeRefreshLayout { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_faq.xml:30
+-keep class com.github.florent37.expansionpanel.ExpansionHeader { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_faq.xml:72
+-keep class com.github.florent37.expansionpanel.ExpansionLayout { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_chart.xml:53
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_country_chart.xml:53
+-keep class com.github.mikephil.charting.charts.LineChart { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_chart.xml:60
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_country_chart.xml:60
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_total.xml:207
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_total_country.xml:201
+-keep class com.google.android.gms.ads.AdView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_toolbar.xml:16
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_toolbar_custom_background.xml:16
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_toolbar_elevation.xml:16
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_toolbar_surface.xml:16
+-keep class com.google.android.material.appbar.MaterialToolbar { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\activity_main.xml:25
+-keep class com.google.android.material.bottomnavigation.BottomNavigationView { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_news.xml:50
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_calendar_month_navigation.xml:32
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_picker_header_fullscreen.xml:36
+-keep class com.google.android.material.button.MaterialButton { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\fragment_news.xml:41
+-keep class com.google.android.material.button.MaterialButtonToggleGroup { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_action_chip.xml:17
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_chip_zero_corner_radius.xml:17
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_reflow_chipgroup.xml:25
+-keep class com.google.android.material.chip.Chip { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_reflow_chipgroup.xml:19
+-keep class com.google.android.material.chip.ChipGroup { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_calendar_month.xml:18
+-keep class com.google.android.material.datepicker.MaterialCalendarGridView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_bottom_navigation_item.xml:27
+-keep class com.google.android.material.internal.BaselineLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_text_input_end_icon.xml:18
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_text_input_start_icon.xml:18
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_picker_header_toggle.xml:18
+-keep class com.google.android.material.internal.CheckableImageButton { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_navigation_item.xml:17
+-keep class com.google.android.material.internal.NavigationMenuItemView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_navigation_menu.xml:17
+-keep class com.google.android.material.internal.NavigationMenuView { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_layout_snackbar.xml:18
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_layout_snackbar.xml:18
+-keep class com.google.android.material.snackbar.Snackbar$SnackbarLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\design_layout_snackbar_include.xml:18
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_layout_snackbar_include.xml:18
+-keep class com.google.android.material.snackbar.SnackbarContentLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_picker_text_input_date.xml:31
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_picker_text_input_date_range.xml:32
+-keep class com.google.android.material.textfield.TextInputEditText { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_picker_text_input_date.xml:26
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\mtrl_picker_text_input_date_range.xml:26
+-keep class com.google.android.material.textfield.TextInputLayout { <init>(...); }
+
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\text_view_with_line_height_from_appearance.xml:17
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\text_view_with_line_height_from_layout.xml:17
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\text_view_with_line_height_from_style.xml:17
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\text_view_with_theme_line_height.xml:17
+# Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\text_view_without_line_height.xml:17
+-keep class com.google.android.material.textview.MaterialTextView { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\navigation\mobile_navigation.xml:38
+-keep class dev.jeffnyauke.covid19stats.ui.countries.CountryDetailsFragment { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\navigation\mobile_navigation.xml:47
+-keep class dev.jeffnyauke.covid19stats.ui.countries.CountryFragment { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\navigation\mobile_navigation.xml:76
+-keep class dev.jeffnyauke.covid19stats.ui.faqs.FaqsFragment { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\navigation\mobile_navigation.xml:25
+-keep class dev.jeffnyauke.covid19stats.ui.global.GlobalFragment { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\navigation\mobile_navigation.xml:63
+-keep class dev.jeffnyauke.covid19stats.ui.news.NewsFragment { <init>(...); }
+
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\src\main\res\navigation\mobile_navigation.xml:82
+-keep class dev.jeffnyauke.covid19stats.ui.settings.SettingsFragment { <init>(...); }
+
+
+-dontwarn android.databinding.ViewDataBinding
+-dontwarn android.databinding.ViewDataBinding$LiveDataListener
+
+# instant apps load these via reflection so we need to keep them.
+-keep public class * extends android.databinding.DataBinderMapper
+
+
+# Allow R8 to optimize away the FastServiceLoader.
+# Together with ServiceLoader optimization in R8
+# this results in direct instantiation when loading Dispatchers.Main
+-assumenosideeffects class kotlinx.coroutines.internal.MainDispatcherLoader {
+    boolean FAST_SERVICE_LOADER_ENABLED return false;
+}
+
+-assumenosideeffects class kotlinx.coroutines.internal.FastServiceLoaderKt {
+    boolean ANDROID_DETECTED return true;
+}
+
+# Disable support for "Missing Main Dispatcher", since we always have Android main dispatcher
+-assumenosideeffects class kotlinx.coroutines.internal.MainDispatchersKt {
+    boolean SUPPORT_MISSING return false;
+}
+
+# Statically turn off all debugging facilities and assertions
+-assumenosideeffects class kotlinx.coroutines.DebugKt {
+    boolean getASSERTIONS_ENABLED() return false;
+    boolean getDEBUG() return false;
+    boolean getRECOVER_STACK_TRACES() return false;
+}
+# ServiceLoader support
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+-keepnames class kotlinx.coroutines.android.AndroidExceptionPreHandler {}
+-keepnames class kotlinx.coroutines.android.AndroidDispatcherFactory {}
+
+# Most of volatile fields are updated with AFU and should not be mangled
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}
+
+# Same story for the standard library's SafeContinuation that also uses AtomicReferenceFieldUpdater
+-keepclassmembernames class kotlin.coroutines.SafeContinuation {
+    volatile <fields>;
+}
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# setProgress is called via an ObjectAnimator in AbstractAppBarOnDestinationChangedListener
+-keepclassmembers class androidx.appcompat.graphics.drawable.DrawerArrowDrawable {
+    void setProgress(float);
+}
+
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# CoordinatorLayout resolves the behaviors of its child components with reflection.
+-keep public class * extends androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>();
+}
+
+# Make sure we keep annotations for CoordinatorLayout's DefaultBehavior
+-keepattributes RuntimeVisible*Annotation*
+
+# Copyright (C) 2018 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# AppCompatViewInflater reads the viewInflaterClass theme attribute which then
+# reflectively instantiates MaterialComponentsViewInflater using the no-argument
+# constructor. We only need to keep this constructor and the class name if
+# AppCompatViewInflater is also being kept.
+-if class androidx.appcompat.app.AppCompatViewInflater
+-keep class com.google.android.material.theme.MaterialComponentsViewInflater {
+    <init>();
+}
+
+# Copyright (C) 2018 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# An inner class of RecyclerView is part of MaterialPickerDialogFragment.java 
+-keep class androidx.recyclerview.widget.RecyclerView { *; }
+
+
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Preference objects are inflated via reflection
+-keep public class androidx.preference.Preference {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keep public class * extends androidx.preference.Preference {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+# Copyright (C) 2018 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Ensure that reflectively-loaded inflater is not obfuscated. This can be
+# removed when we stop supporting AAPT1 builds.
+-keepnames class androidx.appcompat.app.AppCompatViewInflater
+
+# aapt is not able to read app::actionViewClass and app:actionProviderClass to produce proguard
+# keep rules. Add a commonly used SearchView to the keep list until b/109831488 is resolved.
+-keep class androidx.appcompat.widget.SearchView { <init>(...); }
+-keep public class com.google.android.gms.ads.internal.ClientApi {
+  <init>();
+}
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.ads.zzecd {
+  <fields>;
+}
+
+# Auto-generated proguard rule with obfuscated symbol
+-dontwarn com.google.android.gms.internal.ads.zzaxq
+
+
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# When layoutManager xml attribute is used, RecyclerView inflates
+#LayoutManagers' constructors using reflection.
+-keep public class * extends androidx.recyclerview.widget.RecyclerView$LayoutManager {
+    public <init>(android.content.Context, android.util.AttributeSet, int, int);
+    public <init>();
+}
+
+-keepclassmembers class androidx.recyclerview.widget.RecyclerView {
+    public void suppressLayout(boolean);
+    public boolean isLayoutSuppressed();
+}
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
+
+# Retrofit does reflection on method and parameter annotations.
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+
+# Retain service method parameters when optimizing.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# Ignore JSR 305 annotations for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions$*
+
+# With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
+# and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
+
+-keep class kotlin.reflect.jvm.internal.impl.builtins.BuiltInsLoaderImpl
+
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+
+# Copyright (C) 2016 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# keep setters in VectorDrawables so that animations can still work.
+-keepclassmembers class androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$* {
+   void set*(***);
+   *** get*();
+}
+
+# Copyright (C) 2016 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# CoordinatorLayout resolves the behaviors of its child components with reflection.
+-keep public class * extends androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>();
+}
+
+# Make sure we keep annotations for CoordinatorLayout's DefaultBehavior and ViewPager's DecorView
+-keepattributes *Annotation*
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.measurement.zzfd {
+  <fields>;
+}
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.measurement.zzfd {
+  <fields>;
+}
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.measurement.zzfd {
+  <fields>;
+}
+
+-dontwarn com.google.firebase.platforminfo.KotlinDetector
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.ads.zzecd {
+  <fields>;
+}
+
+# b/35135904 Ensure that proguard will not strip the mResultGuardian.
+-keepclassmembers class com.google.android.gms.common.api.internal.BasePendingResult {
+  com.google.android.gms.common.api.internal.BasePendingResult$ReleasableResultGuardian mResultGuardian;
+}
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.measurement.zzfd {
+  <fields>;
+}
+
+# Keep implementations of the AdMob mediation adapter interfaces. Adapters for
+# third party ad networks implement these interfaces and are invoked by the
+# AdMob SDK via reflection.
+
+-keep class * implements com.google.android.gms.ads.mediation.MediationAdapter {
+  public *;
+}
+-keep class * implements com.google.ads.mediation.MediationAdapter {
+  public *;
+}
+-keep class * implements com.google.android.gms.ads.mediation.customevent.CustomEvent {
+  public *;
+}
+-keep class * implements com.google.ads.mediation.customevent.CustomEvent {
+  public *;
+}
+-keep class * extends com.google.android.gms.ads.mediation.MediationAdNetworkAdapter {
+  public *;
+}
+-keep class * extends com.google.android.gms.ads.mediation.Adapter {
+  public *;
+}
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.ads.zzecd {
+  <fields>;
+}
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.measurement.zzfd {
+  <fields>;
+}
+
+# We keep all fields for every generated proto file as the runtime uses
+# reflection over them that ProGuard cannot detect. Without this keep
+# rule, fields may be removed that would cause runtime failures.
+-keepclassmembers class * extends com.google.android.gms.internal.measurement.zzfd {
+  <fields>;
+}
+
+# Proguard flags for consumers of the Google Play services SDK
+# https://developers.google.com/android/guides/setup#add_google_play_services_to_your_project
+
+# Keep SafeParcelable NULL value, needed for reflection by DowngradeableSafeParcel
+-keepclassmembers public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Needed for Parcelable/SafeParcelable classes & their creators to not get renamed, as they are
+# found via reflection.
+-keep class com.google.android.gms.common.internal.ReflectedParcelable
+-keepnames class * implements com.google.android.gms.common.internal.ReflectedParcelable
+-keepclassmembers class * implements android.os.Parcelable {
+  public static final *** CREATOR;
+}
+
+# Keep the classes/members we need for client functionality.
+-keep @interface androidx.annotation.Keep
+-keep @androidx.annotation.Keep class *
+-keepclasseswithmembers class * {
+  @androidx.annotation.Keep <fields>;
+}
+-keepclasseswithmembers class * {
+  @androidx.annotation.Keep <methods>;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep @interface com.google.android.gms.common.annotation.KeepName
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+  @com.google.android.gms.common.annotation.KeepName *;
+}
+
+# Keep Dynamite API entry points
+-keep @interface com.google.android.gms.common.util.DynamiteApi
+-keep @com.google.android.gms.common.util.DynamiteApi public class * {
+  public <fields>;
+  public <methods>;
+}
+
+# Needed when building against pre-Marshmallow SDK.
+-dontwarn android.security.NetworkSecurityPolicy
+
+# Needed when building against Marshmallow SDK.
+-dontwarn android.app.Notification
+
+# Protobuf has references not on the Android boot classpath
+-dontwarn sun.misc.Unsafe
+-dontwarn libcore.io.Memory
+
+# Internal Google annotations for generating Proguard keep rules.
+-dontwarn com.google.android.apps.common.proguard.UsedBy*
+
+# Annotations referenced by the SDK but whose definitions are contained in
+# non-required dependencies.
+-dontwarn javax.annotation.**
+-dontwarn org.checkerframework.**
+
+# Copyright (C) 2020 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# The default FragmentFactory creates Fragment instances using reflection
+-if public class ** extends androidx.fragment.app.Fragment
+-keepclasseswithmembers,allowobfuscation public class <1> {
+    public <init>();
+}
+
+# Copyright (C) 2017 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Keep a field in transition that is used to keep a reference to weakly-referenced object
+-keepclassmembers class androidx.transition.ChangeBounds$* extends android.animation.AnimatorListenerAdapter {
+  androidx.transition.ChangeBounds$ViewBounds mViewBounds;
+}
+
+-keep class * extends androidx.work.Worker
+-keep class * extends androidx.work.InputMerger
+# Keep all constructors on ListenableWorker, Worker (also marked with @Keep)
+-keep public class * extends androidx.work.ListenableWorker {
+    public <init>(...);
+}
+# We need to keep WorkerParameters for the ListenableWorker constructor
+-keep class androidx.work.WorkerParameters
+
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# NavArgsLazy creates NavArgs instances using reflection
+-if public class ** implements androidx.navigation.NavArgs
+-keepclassmembers public class <1> {
+    ** fromBundle(android.os.Bundle);
+}
+
+# Never inline methods, but allow shrinking and obfuscation.
+-keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.view.ViewCompat$ViewCompatApi29 {
+  <methods>;
+}
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
+    <init>(androidx.lifecycle.SavedStateHandle);
+}
+
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.AndroidViewModel {
+    <init>(android.app.Application,androidx.lifecycle.SavedStateHandle);
+}
+
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
+    <init>();
+}
+
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.AndroidViewModel {
+    <init>(android.app.Application);
+}
+
+# this rule is need to work properly when app is compiled with api 28, see b/142778206
+-keepclassmembers class * extends androidx.lifecycle.EmptyActivityLifecycleCallbacks { *; }
+-keepattributes *Annotation*
+
+-keepclassmembers enum androidx.lifecycle.Lifecycle$Event {
+    <fields>;
+}
+
+-keep !interface * implements androidx.lifecycle.LifecycleObserver {
+}
+
+-keep class * implements androidx.lifecycle.GeneratedAdapter {
+    <init>(...);
+}
+
+-keepclassmembers class ** {
+    @androidx.lifecycle.OnLifecycleEvent *;
+}
+
+# this rule is need to work properly when app is compiled with api 28, see b/142778206
+-keepclassmembers class androidx.lifecycle.ReportFragment$LifecycleCallbacks { *; }
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+-keepclassmembers,allowobfuscation class * implements androidx.savedstate.SavedStateRegistry$AutoRecreated {
+    <init>();
+}
+
+-keep class * extends androidx.room.RoomDatabase
+-dontwarn androidx.room.paging.**
+
+-dontwarn com.google.firebase.components.Component$Instantiation
+-dontwarn com.google.firebase.components.Component$ComponentType
+
+-keep class * implements com.google.firebase.components.ComponentRegistrar
+
+
+-keep public class * implements androidx.versionedparcelable.VersionedParcelable
+-keep public class android.support.**Parcelizer { *; }
+-keep public class androidx.**Parcelizer { *; }
+-keep public class androidx.versionedparcelable.ParcelImpl
+
+-keep,allowobfuscation @interface androidx.annotation.Keep
+-keep @androidx.annotation.Keep class * {*;}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <init>(...);
+}
+
+# JSR 305 annotations are for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# A resource is loaded with a relative path so the package of this class must be preserved.
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# OkHttp platform used only on JVM and when Conscrypt dependency is available.
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+
+# JSR 305 annotations are for embedding nullability information.
+-dontwarn javax.annotation.**
+
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+
+-keep @com.squareup.moshi.JsonQualifier interface *
+
+# Enum field names are used by the integrated EnumJsonAdapter.
+# values() is synthesized by the Kotlin compiler and is used by EnumJsonAdapter indirectly
+# Annotate enums with @JsonClass(generateAdapter = false) to use them with Moshi.
+-keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
+    <fields>;
+    **[] values();
+}
+
+# The name of @JsonClass types is used to look up the generated adapter.
+-keepnames @com.squareup.moshi.JsonClass class *
+
+# Retain generated target class's synthetic defaults constructor and keep DefaultConstructorMarker's
+# name. We will look this up reflectively to invoke the type's constructor.
+#
+# We can't _just_ keep the defaults constructor because Proguard/R8's spec doesn't allow wildcard
+# matching preceding parameters.
+-keepnames class kotlin.jvm.internal.DefaultConstructorMarker
+-keepclassmembers @com.squareup.moshi.JsonClass @kotlin.Metadata class * {
+    synthetic <init>(...);
+}
+
+# Retain generated JsonAdapters if annotated type is retained.
+-if @com.squareup.moshi.JsonClass class *
+-keep class <1>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*
+-keep class <1>_<2>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*
+-keep class <1>_<2>_<3>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*
+-keep class <1>_<2>_<3>_<4>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*$*
+-keep class <1>_<2>_<3>_<4>_<5>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*$*$*
+-keep class <1>_<2>_<3>_<4>_<5>_<6>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+-ignorewarnings

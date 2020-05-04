@@ -1,39 +1,42 @@
+<img width="100" height="100" src="art/app_icon.png?raw=true">
+
 <p align="center">
-  <img src="art/icon.png" height="200"/>
+  <img width="285" src="art/overview-light.png?raw=true">
+  <img width="285" src="art/countries-light.png?raw=true">
+  <img width="285" src="art/country-light.png?raw=true">
+  <img width="285" src="art/country-scroll-light.png?raw=true">
 </p>
 
-# COVID19 Notifier - India 🇮🇳
+# Covid-19-World-Stats
 
-![CI](https://github.com/PatilShreyas/Covid19-Notifier-IN/workflows/CI/badge.svg?branch=master)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Github Followers](https://img.shields.io/github/followers/PatilShreyas?label=Follow&style=social)
-![GitHub stars](https://img.shields.io/github/stars/PatilShreyas/Covid19-Notifier-IN?style=social)
-![GitHub forks](https://img.shields.io/github/forks/PatilShreyas/Covid19-Notifier-IN?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/PatilShreyas/Covid19-Notifier-IN?style=social)
-![Twitter Follow](https://img.shields.io/twitter/follow/imShreyasPatil?label=Follow&style=social)
+![Github Followers](https://img.shields.io/github/followers/jeffnyauke?label=Follow&style=social)
+![GitHub stars](https://img.shields.io/github/stars/jeffnyauke/Covid19-Notifier-IN?style=social)
+![GitHub forks](https://img.shields.io/github/forks/jeffnyauke/Covid19-Notifier-IN?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/jeffnyauke/Covid19-Notifier-IN?style=social)
+![Twitter Follow](https://img.shields.io/twitter/follow/pesapocket?label=Follow&style=social)
 
-**Covid19 Notifier India** is a sample Android application 📱 built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤️. 
+**Covid-19 World Stats** is an Android App that displays the latest global stats about the COVID-19 spread. It caches data locally. The sample Android application 📱 is built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤ .
 
-***You can Install and test latest Covid19 Notifier app from below 👇***
+***You can Install and test latest Covid-19 World Stats app from below 👇***
 
-[![Covid19 App](https://img.shields.io/badge/Covid19Notifier-APK-blue.svg?style=for-the-badge&logo=android)](https://github.com/PatilShreyas/Covid19-Notifier-IN/releases/download/v2.0/app-debug.apk)
+[Covid-19 World Stats App](https://appdistribution.firebase.dev/i/fLb85aoy)
 
-<table style="width:100%">
-  <tr>
-    <th>Main Screen (Total Report)</th>
-    <th>Main Screen (State Report List)</th>
-    <th>Notification in the System Tray</th>
-  </tr>
-  <tr>
-    <td><img src="art/home.jpg"/></td>
-    <td><img src="art/states.jpg"/></td> 
-    <td><img src="art/notification.jpg"/></td>
-  </tr>
-</table>
+<p align="center">
+  <img width="285" src="art/overview-dark.png?raw=true">
+  <img width="285" src="art/countries-dark.png?raw=true">
+  <img width="285" src="art/country-dark.png?raw=true">
+  <img width="285" src="art/country-scroll-light.png?raw=true">
+  <img width="285" src="art/faqs-dark.png?raw=true">
+  <img width="285" src="art/settings-dark.png?raw=true">
+</p>
 
 ## About
-- It simply loads **Total COVID19 cases in India** from [API](https://github.com/covid19india/api). 
-- It notifies total cases of COVID19 in India after every 1 hours.
+- It loads **Total COVID-19 cases worldwide** from [API](https://github.com/NovelCOVID/API).
+- It notifies total cases of worldwide COVID-19 cases in after every 1 hours.
+- It loads COVID-19 numbers for any specific country.
+- It displays the statistics on linear charts.
+- It loads COVID related news from the W.H.O. and Google News RSS.
 - It is offline capable (Using Cache) 😃.
 
 *It uses `PeriodicWorkManager` which is scheduled at the first run of an app. After that, `Worker` will execute after every one hour of interval and will show notification on Android's system tray.*
@@ -55,7 +58,7 @@
 
 # Package Structure
     
-    dev.shreyaspatil.covid19notify    # Root Package
+    dev.jeffnyauke.covid19stats    # Root Package
     .
     ├── api                 # For API Service.
     ├── model               # Model classes
@@ -69,23 +72,43 @@
     └── worker              # Worker class.
 
 
-## Contribute
-If you want to contribute to this library, you're always welcome!
-See [Contributing Guidelines](CONTRIBUTING.md). 
+### Contributing
+Take a look at the [open issues](https://github.com/jeffnyauke/Covid-19-World-Stats/issues) and feel free to pick something up.
+
+### API Sources
+This app would not exist without it's data sources.
+
+ - [Tne Novel Covid API](https://github.com/NovelCOVID/API) by [Novel COVID](https://github.com/NovelCOVID)
+ - [COVID19 News API](https://github.com/einnar82/covid19-news-api) by [Rannie Ollit](https://github.com/einnar82)
 
 ## Credits
-Thanks to [COVID19India.org](https://github.com/covid19india/api) for open-source API.
+Thanks to [Covid19-Notifier-IN](https://github.com/PatilShreyas/Covid19-Notifier-IN) by [Shreyas Patil](https://github.com/PatilShreyas) for inspiration.
 
 ## Contact
 If you need any help, you can connect with me.
 
-Visit:- [shreyaspatil.dev](https://shreyaspatil.dev)
+Visit:- [Jeffrey Nyauke](piestackio@gmail.com)
+
+## Support
+You can support via [paypal](https://www.paypal.com/jeffnyauke)
+
+## Authors
+
+<a href="https://twitter.com/jeffreynyauke" target="_blank">
+  <img src="https://avatars1.githubusercontent.com/u/14073448?s=400&u=e21d2306a36644576535f8f2f7ba939aeee148f1&v=4" width="70" align="left">
+</a>
+
+**Jeffrey Nyauke**
+
+[![Linkedin](https://img.shields.io/badge/-linkedin-grey?logo=linkedin)](https://www.linkedin.com/in/jeffreynyauke/)
+[![Twitter](https://img.shields.io/badge/-twitter-grey?logo=twitter)](https://twitter.com/pesapocket)
+[![Medium](https://img.shields.io/badge/-medium-grey?logo=medium)](https://medium.com/@jeffnyauke)
 
 ## License
 ```
 MIT License
 
-Copyright (c) 2020 Shreyas Patil
+Copyright 2020 Jeffrey Nyauke
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
