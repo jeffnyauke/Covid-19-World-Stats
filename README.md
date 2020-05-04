@@ -8,6 +8,9 @@
 
 # Covid-19 World Stats
 
+[![Kotlin Version](https://img.shields.io/badge/kotlin-1.3.71-blue.svg)](http://kotlinlang.org/)
+[![Gradle](https://img.shields.io/badge/gradle-6.1-blue.svg)](https://lv.binarybabel.org/catalog/gradle/latest)
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21)
 [![GitHub license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Github Followers](https://img.shields.io/github/followers/jeffnyauke?label=Follow&style=social)
 ![GitHub stars](https://img.shields.io/github/stars/jeffnyauke/Covid19-Notifier-IN?style=social)
@@ -20,6 +23,7 @@
 The sample Android application 📱 is built to demonstrate use of *Modern Android development* tools. Dedicated to all Android Developers with ❤ .
 
 ***You can Install and test latest Covid-19 World Stats app from below 👇***
+
 [Covid-19 World Stats App](https://appdistribution.firebase.dev/i/fLb85aoy)
 
 ## About
