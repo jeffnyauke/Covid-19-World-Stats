@@ -22,6 +22,34 @@ jobs:
       - name: Grant Permission to Execute
         run: chmod +x gradlew
 
+      - name: Decode local.properties
+        run: echo "signing.key.alias=${{ secrets.SIGNING_KEY_ALIAS }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "signing.key.password=${{ secrets.SIGNING_KEY_PASSWORD }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "signing.store.file=${{ secrets.SIGNING_STORE_FILE }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "signing.store.password=${{ secrets.SIGNING_STORE_PASSWORD }}" > ./local.properties
+
+      - name: Decode local.properties
+        run: echo "admob.app.id=${{ secrets.ADMOB_APP_ID }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.banner_total=${{ secrets.ADMOB_UNIT_BANNER_TOTAL }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.banner_total_country=${{ secrets.ADMB_UNIT_BANNER_TOTAL_COUNRTY }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.banner_chart=${{ secrets.ADMOB_UNIT_BANNER_CHART }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.banner_chart_country=${{ secrets.ADMOB_UNIT_BANNER_CHART_COUNTRY }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.interstitial=${{ secrets.ADMOB_NIT_INTERSTITIAL }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.native_country=${{ secrets.ADMOB_UNIT_NATIVE_COUNTRY }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.native_news=${{ secrets.ADMOB_UNIT_NATIVE_NEWS }}" > ./local.properties
+      - name: Decode local.properties
+        run: echo "admob.unit.test=${{ secrets.ADMOB_UNIT_TEST }}" > ./local.properties
+
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
 
