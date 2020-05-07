@@ -418,7 +418,7 @@
 # Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_chart.xml:60
 # Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_country_chart.xml:60
 # Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_total.xml:207
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_total_country.xml:201
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\incremental\mergeReleaseResources\stripped.dir\layout\item_total_country.xml:207
 -keep class com.google.android.gms.ads.AdView { <init>(...); }
 
 # Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\92265d7916f71b039454357c09152f1d\material-1.2.0-alpha06\res\layout\test_toolbar.xml:16
