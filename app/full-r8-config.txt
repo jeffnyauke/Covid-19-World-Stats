@@ -204,63 +204,63 @@
 
 # Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:36
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:231
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:230
 -keep class androidx.lifecycle.ProcessLifecycleOwnerInitializer { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:237
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:236
 -keep class androidx.room.MultiInstanceInvalidationService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:142
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:141
 -keep class androidx.work.impl.WorkManagerInitializer { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:171
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:170
 -keep class androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:181
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:180
 -keep class androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:201
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:200
 -keep class androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:191
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:190
 -keep class androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:221
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:220
 -keep class androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:210
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:209
 -keep class androidx.work.impl.background.systemalarm.RescheduleReceiver { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:149
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:148
 -keep class androidx.work.impl.background.systemalarm.SystemAlarmService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:154
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:153
 -keep class androidx.work.impl.background.systemjob.SystemJobService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:160
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:159
 -keep class androidx.work.impl.foreground.SystemForegroundService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:166
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:165
 -keep class androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:62
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:61
 -keep class coil.util.CoilContentProvider { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:240
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:239
 -keep class com.google.android.datatransport.runtime.backends.TransportBackendDiscovery { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:253
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:252
 -keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:247
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:246
 -keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:126
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:125
 -keep class com.google.android.gms.ads.AdActivity { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:132
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:131
 -keep class com.google.android.gms.ads.MobileAdsInitProvider { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:122
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:121
 -keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:87
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:86
 -keep class com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:101
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:100
 -keep class com.google.android.gms.measurement.AppMeasurementJobService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:82
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:81
 -keep class com.google.android.gms.measurement.AppMeasurementReceiver { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:97
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:96
 -keep class com.google.android.gms.measurement.AppMeasurementService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:67
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:66
 -keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:107
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:106
 -keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:116
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:115
 -keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
 # Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:36
 -keep class dev.jeffnyauke.covid19stats.CovidStatsApp { <init>(); }
-# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:50
+# Referenced at D:\Androids\Covid19-Notifier-IN\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:49
 -keep class dev.jeffnyauke.covid19stats.ui.MainActivity { <init>(); }
 # Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_button_bar_material.xml:43
 # Referenced at C:\Users\Jeffrey Nyauke\.gradle\caches\transforms-2\files-2.1\f3de68cbccbfbf6eb100706eb6a24aaf\appcompat-1.1.0\res\layout\abc_alert_dialog_material.xml:52

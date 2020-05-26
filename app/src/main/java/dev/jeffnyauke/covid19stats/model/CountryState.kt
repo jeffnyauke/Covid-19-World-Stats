@@ -38,6 +38,6 @@ data class CountryState(
     @Json(name = "tests")
     var tests: Int = 0,
     @Json(name = "testsPerOneMillion")
-    var testsPerOneMillion: Int = 0
+    var testsPerOneMillion: Double? = 0.toDouble()
 
 )

@@ -44,12 +44,12 @@ data class Cases(
     @Json(name = "critical")
     var critical: Int = 0,
     @Json(name = "casesPerOneMillion")
-    var casesPerOneMillion: Int = 0,
+    var casesPerOneMillion: Double? = 0.toDouble(),
     @Json(name = "deathsPerOneMillion")
-    var deathsPerOneMillion: Int = 0,
+    var deathsPerOneMillion: Double? = 0.toDouble(),
     @Json(name = "tests")
     var tests: Int = 0,
     @Json(name = "testsPerOneMillion")
-    var testsPerOneMillion: Int = 0
+    var testsPerOneMillion: Double? = 0.toDouble()
 
 )
