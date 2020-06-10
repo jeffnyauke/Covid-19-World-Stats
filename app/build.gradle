@@ -49,14 +49,14 @@ android {
         enabled = true
     }
 
-/*    signingConfigs {
+    signingConfigs {
         release {
             keyAlias keystoreProperties['signing.key.alias']
             keyPassword keystoreProperties['signing.key.password']
             storeFile file(keystoreProperties['signing.store.file'])
             storePassword keystoreProperties['signing.store.password']
         }
-    }*/
+    }
 
     buildTypes {
         debug {
@@ -85,7 +85,7 @@ android {
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
-            //signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
 
             resValue 'string', 'admob_app_id', keystoreProperties['admob.app.id']
             resValue 'string', 'admob_unit_banner_total', keystoreProperties['admob.unit.banner_total']
