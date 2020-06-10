@@ -43,6 +43,7 @@ jobs:
           signing.store.file=key.jks
           signing.store.password=${{ secrets.SIGNING_STORE_PASSWORD }}
 
+          admob.app.id=${{ secrets.ADMOB_APP_ID }}
           admob.unit.banner_total=${{ secrets.ADMOB_UNIT_BANNER_TOTAL }}
           admob.unit.banner_total_country=${{ secrets.ADMB_UNIT_BANNER_TOTAL_COUNRTY }}
           admob.unit.banner_chart=${{ secrets.ADMOB_UNIT_BANNER_CHART }}
@@ -91,6 +92,7 @@ jobs:
           signing.store.file=key.jks
           signing.store.password=${{ secrets.SIGNING_STORE_PASSWORD }}
 
+          admob.app.id=${{ secrets.ADMOB_APP_ID }}
           admob.unit.banner_total=${{ secrets.ADMOB_UNIT_BANNER_TOTAL }}
           admob.unit.banner_total_country=${{ secrets.ADMB_UNIT_BANNER_TOTAL_COUNRTY }}
           admob.unit.banner_chart=${{ secrets.ADMOB_UNIT_BANNER_CHART }}
