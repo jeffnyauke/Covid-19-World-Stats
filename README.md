@@ -8,6 +8,7 @@
 
 # Covid-19 World Stats
 
+![Github Actions](https://github.com/jeffnyauke/Covid-19-World-Stats/workflows/Build.yml/badge.svg)
 [![Kotlin Version](https://img.shields.io/badge/kotlin-1.3.71-blue.svg)](http://kotlinlang.org/)
 [![Gradle](https://img.shields.io/badge/gradle-6.1-blue.svg)](https://lv.binarybabel.org/catalog/gradle/latest)
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=21)
