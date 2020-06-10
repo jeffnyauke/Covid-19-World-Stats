@@ -73,8 +73,10 @@ jobs:
       - name: Add secrets
         run: |
           echo $SIGNING_STORE_FILE | base64 -d > app/key.jks
+          mkdir -p app/src/release/
           echo $FIREBASE_CONFIG | base64 -d > app/src/release/google-services.json
-          echo $FIREBASE_CONFIG_DEBUG | base64 -d > app/src/release/google-services.json
+          mkdir -p app/src/debug/
+          echo $FIREBASE_CONFIG_DEBUG | base64 -d > app/src/debug/google-services.json
         env:
           SIGNING_STORE_FILE: ${{ secrets.SIGNING_STORE_FILE }}
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
