@@ -56,8 +56,8 @@ jobs:
 
       - name: Create required files
       - run: echo $SIGNING_STORE_FILE | base64 -d > app/key.jks
-          env:
-            $SIGNING_STORE_FILE: ${{ secrets.$SIGNING_STORE_FILE }}
+        env:
+          $SIGNING_STORE_FILE: ${{ secrets.$SIGNING_STORE_FILE }}
       - run: echo FIREBASE_CONFIG | base64 -d > app/src/release/google-services.json
         env:
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
