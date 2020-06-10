@@ -24,7 +24,7 @@ jobs:
 
       - name: Add secrets
         run: |
-          cat > local.properties &lt;&lt; ENDOFFILE
+          cat > local.properties << ENDOFFILE
 
           admob.app.id=${{ secrets.ADMOB_APP_ID }}
           admob.unit.banner_total=${{ secrets.ADMOB_UNIT_BANNER_TOTAL }}
@@ -56,7 +56,7 @@ jobs:
 
       - name: Add secrets
         run: |
-          cat > local.properties &lt;&lt; ENDOFFILE
+          cat > local.properties << ENDOFFILE
 
           admob.app.id=${{ secrets.ADMOB_APP_ID }}
           admob.unit.banner_total=${{ secrets.ADMOB_UNIT_BANNER_TOTAL }}
